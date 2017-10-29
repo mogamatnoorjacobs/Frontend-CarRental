@@ -36,7 +36,7 @@
 										htmlData += '<td>' + v.model + '</td>';
 										htmlData += '<td>' + v.year + '</td>';
 										htmlData += '<td>' + v.quantity + '</td>';
-										htmlData += '<td><a href="editCar.php" class="btn btn-outline-warning" data-value="'+v.id+'" id="edit">Edit</a><a href="listOfCars.php" class="btn btn-outline-danger" data-value="'+v.id+'" id="delete" >Delete</a><br /></td>';
+										htmlData += '<td><a href="editCar.html" class="btn btn-outline-warning" data-value="'+v.id+'" id="edit">Edit</a><a href="listOfCars.php" class="btn btn-outline-danger" data-value="'+v.id+'" id="delete" >Delete</a><br /></td>';
 										htmlData += '</tr>';
 										$("#table tbody").append(htmlData);
 							   		});
@@ -72,7 +72,7 @@
 								async: false,
 								success: function(data)
 								{
-									location.href="listOfCars.php";
+									location.href="listOfCars.html";
 								}
 							});
 
@@ -123,7 +123,7 @@
 									sessionStorage.setItem("carId", edit_of_edit_button);
 
 									//open the edit car page
-									location.href="editCar.php";
+									location.href="editCar.html";
 									event.preventDefault();
 								});
 						}

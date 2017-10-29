@@ -4,7 +4,7 @@ $(document).ready(function(){
   var URLlink = "http://localhost:8080";
   var info;
 
-  alert(sessionStorage.carId);
+  //alert(sessionStorage.carId);
 
       $.ajax({
   			type: "GET",
@@ -14,16 +14,14 @@ $(document).ready(function(){
   			async: false,
   			success: function(data)
   			{
-  				document.getElementById("txtMake").value = data.make;
-          document.getElementById("txtModel").value = data.model;
-          document.getElementById("txtYear").value = data.year;
-          document.getElementById("txtQuantity").value = data.quantity;
+				document.getElementById("txtMake").value = data.make;
+				document.getElementById("txtModel").value = data.model;
+				document.getElementById("txtYear").value = data.year;
+				document.getElementById("txtQuantity").value = data.quantity;
   			}
   		});
 
 });
-
-
 
 
 //function to validate the category input
@@ -202,8 +200,8 @@ function validate()
 							infoHtml += '<div class="alert alert-success" role="alert">';
 							infoHtml += '<h4 class="alert-heading">Successfully Updated: ' + make + ' ' + model + ' ' + year + ' ' + quantity + '</h4>';
 							infoHtml += '<hr>'
-							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.php" class="alert-link">View all cars</a></p>';
-							infoHtml += '<p class="mb-0">Please click here to <a href="car.php" class="alert-link">Add a new car</a></p>';
+							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.html" class="alert-link">View all cars</a></p>';
+							infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
 							infoHtml += '</div>';
 
 							$("#container").fadeIn().html(infoHtml);

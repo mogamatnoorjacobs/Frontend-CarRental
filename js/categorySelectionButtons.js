@@ -212,8 +212,8 @@ function validate()
 							infoHtml += '<div class="alert alert-success" role="alert">';
 							infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + quantity + '</h4>';  
 							infoHtml += '<hr>' 
-							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.php" class="alert-link">View all cars</a></p>'; 
-							infoHtml += '<p class="mb-0">Please click here to <a href="car.php" class="alert-link">Add a new car</a></p>';
+							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.html" class="alert-link">View all cars</a></p>';
+							infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
 							infoHtml += '</div>'; 
 
 							$("#container").fadeIn().html(infoHtml); 

@@ -92,7 +92,7 @@ if it's load then it will prevent the data from being loaded again.
 							async: false,
 							success: function(data)
 							{ 
-								alert("All categories are loaded");
+								console.log(data);
 							}
 						}); 
 						}
