@@ -147,29 +147,29 @@ function validateYear(year)
 		else 
 			return year; 
 }
-function validateQuantity(quantity)
+function validateNumberPlate(numberPlate)
 {
-	if(quantity === "")
+	if(numberPlate === "")
 	{
-		$("#errorQuantity").text("Please enter quantity.").show();
+		$("#errorNumberPlate").text("Please enter quantity.").show();
 
 			//fade out the error text when the user clicks on the textbox
-			$("#txtQuantity").click(function(){
-        		$("#errorQuantity").fadeOut('slow'); 
+			$("#txtNumberPlate").click(function(){
+        		$("#errorNumberPlate").fadeOut('slow');
     		});
 
     		//prevent the form from being submitted if there is an error
 			event.preventDefault(); 
 			return false; 
 	}
-	else if(/[^0-9]/.test(quantity))
+	else if(/[^A-Z0-9-]/.test(numberPlate))
 		{
-			$("#errorQuantity").text("Only numeric characters allowed in the field.").show();
+			$("#errorNumberPlate").text("Only Capital letters allowed in the field.").show();
 			//++errorInput; 
 
 			//fade out the error text when the user clicks on the textbox
-				$("#txtQuantity").click(function(){
-        			$("#errorQuantity").fadeOut('slow'); 
+				$("#txtNumberPlate").click(function(){
+        			$("#errorNumberPlate").fadeOut('slow');
     			});
     			return false; 
 
@@ -177,22 +177,22 @@ function validateQuantity(quantity)
 				event.preventDefault(); 
 		}
 		else 
-			return quantity; 
+			return numberPlate;
 }
 //function to validate the submit button from the form 
 function validate()
 {
 	var categoryNumber = validateCategory($("#txtCategory").val());
-
+	var status = true;
 	var make = validateMake($("#txtMake").val());  
 	var model = validateModel($("#txtModel").val()); 
 	var year= validateYear($("#txtYear").val()); 
-	var quantity = validateQuantity($("#txtQuantity").val());
+	var numberPlate = validateNumberPlate($("#txtNumberPlate").val());
 
-	var data = "make=" + make + "&model="+model+"&year="+year+"&quantity="+quantity; 
+	var data = "make=" + make + "&model="+model+"&year="+year+"&numberPlate="+numberPlate+"&status=" + status;
 	event.preventDefault(); 
 
-	if(categoryNumber == false || make == false || model == false || year == false || quantity == false)
+	if(categoryNumber == false || make == false || model == false || year == false || numberPlate == false)
 	{
 		event.preventDefault(); 
 		return; 
@@ -210,7 +210,7 @@ function validate()
 			{ 
 							var infoHtml = ""; 
 							infoHtml += '<div class="alert alert-success" role="alert">';
-							infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + quantity + '</h4>';  
+							infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
 							infoHtml += '<hr>' 
 							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.html" class="alert-link">View all cars</a></p>';
 							infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';

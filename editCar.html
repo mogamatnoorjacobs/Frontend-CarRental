@@ -61,13 +61,13 @@
                     </div>
                     <!-- End of Year text field  -->
 
-                    <!-- Quantity input textfield -->
+                    <!-- Number Plate input textfield -->
                     <div class="form-group row">
                         <!--suppress XmlInvalidId -->
-                        <label for="model" class="col-sm-1 col-form-label">Quantity</label>
+                        <label for="numberPlate" class="col-sm-1 col-form-label">Number Plate</label>
                         <div class="col-sm-5">
-                            <input type="text" id="txtQuantity" class="form-control">
-                            <small id="errorQuantity" class="text-danger"></small>
+                            <input type="text" id="txtNumberPlate" class="form-control">
+                            <small id="errorNumberPlate" class="text-danger"></small>
                         </div>
                     </div>
                     <!-- End of Quantity text field  -->
@@ -80,6 +80,16 @@
                                 document.write('<input type="hidden" id="hidden" value="'+sessionStorage.carId+'" class="form-control">');
                             </script>
 
+                        </div>
+                    </div>
+                    <!-- End of Quantity text field  -->
+                    <!-- Quantity input textfield -->
+                    <div class="form-group row">
+                        <!--suppress XmlInvalidId -->
+                        <label for="model" class="col-sm-1 col-form-label">Status</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="txtStatus" readonly class="form-control">
+                            <small id="errorStatus" class="text-danger"></small>
                         </div>
                     </div>
                     <!-- End of Quantity text field  -->

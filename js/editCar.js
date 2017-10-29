@@ -17,7 +17,8 @@ $(document).ready(function(){
 				document.getElementById("txtMake").value = data.make;
 				document.getElementById("txtModel").value = data.model;
 				document.getElementById("txtYear").value = data.year;
-				document.getElementById("txtQuantity").value = data.quantity;
+				document.getElementById("txtNumberPlate").value = data.numberPlate;
+                document.getElementById("txtStatus").value = data.status;
   			}
   		});
 
@@ -134,37 +135,37 @@ function validateYear(year)
 		else
 			return year;
 }
-function validateQuantity(quantity)
+function validateNumberPlate(numberPlate)
 {
-	if(quantity === "")
-	{
-		$("#errorQuantity").text("Please enter quantity.").show();
+    if(numberPlate === "")
+    {
+        $("#errorNumberPlate").text("Please enter quantity.").show();
 
-			//fade out the error text when the user clicks on the textbox
-			$("#txtQuantity").click(function(){
-        		$("#errorQuantity").fadeOut('slow');
-    		});
+        //fade out the error text when the user clicks on the textbox
+        $("#txtNumberPlate").click(function(){
+            $("#errorNumberPlate").fadeOut('slow');
+        });
 
-    		//prevent the form from being submitted if there is an error
-			event.preventDefault();
-			return false;
-	}
-	else if(/[^0-9]/.test(quantity))
-		{
-			$("#errorQuantity").text("Only numeric characters allowed in the field.").show();
-			//++errorInput;
+        //prevent the form from being submitted if there is an error
+        event.preventDefault();
+        return false;
+    }
+    else if(/[^A-Z0-9-]/.test(numberPlate))
+    {
+        $("#errorNumberPlate").text("Only Capital letters allowed in the field.").show();
+        //++errorInput;
 
-			//fade out the error text when the user clicks on the textbox
-				$("#txtQuantity").click(function(){
-        			$("#errorQuantity").fadeOut('slow');
-    			});
-    			return false;
+        //fade out the error text when the user clicks on the textbox
+        $("#txtNumberPlate").click(function(){
+            $("#errorNumberPlate").fadeOut('slow');
+        });
+        return false;
 
-    			//prevent the form from being submitted if there is an error
-				event.preventDefault();
-		}
-		else
-			return quantity;
+        //prevent the form from being submitted if there is an error
+        event.preventDefault();
+    }
+    else
+        return numberPlate;
 }
 //function to validate the submit button from the form
 function validate()
@@ -175,12 +176,13 @@ function validate()
 	var make = validateMake($("#txtMake").val());
 	var model = validateModel($("#txtModel").val());
 	var year= validateYear($("#txtYear").val());
-	var quantity = validateQuantity($("#txtQuantity").val());
+	var numberPlate = validateNumberPlate($("#txtNumberPlate").val());
+    var status = $("#txtStatus").val();
 
-	var data = "id=" + sessionData + "&make=" + make + "&model="+model+"&year="+year+"&quantity="+quantity;
+	var data = "id=" + sessionData + "&make=" + make + "&model="+model+"&year="+year+"&numberPlate="+numberPlate+"&status="+status;
 	event.preventDefault();
 
-	if(make == false || model == false || year == false || quantity == false)
+	if(make == false || model == false || year == false || numberPlate == false)
 	{
 		event.preventDefault();
 		return;
@@ -198,7 +200,7 @@ function validate()
 			{
 							var infoHtml = "";
 							infoHtml += '<div class="alert alert-success" role="alert">';
-							infoHtml += '<h4 class="alert-heading">Successfully Updated: ' + make + ' ' + model + ' ' + year + ' ' + quantity + '</h4>';
+							infoHtml += '<h4 class="alert-heading">Successfully Updated: ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
 							infoHtml += '<hr>'
 							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.html" class="alert-link">View all cars</a></p>';
 							infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
