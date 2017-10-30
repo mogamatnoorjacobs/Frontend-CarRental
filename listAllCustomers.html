@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Customers</title>
+</head>
+<body>
+
+<div id="header"></div>
+
+<table style="width:100%" class="table">
+
+    <tr>
+        <th>Customer ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Update Customer</th>
+    </tr >
+
+    <tbody  class="customersTable"> </tbody>
+
+
+</table>
+
+</body>
+
+<div id="footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/viewAllCustomers.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#header").load("./templates/inc_header.html");
+        $("#footer").load("./templates/inc_footer.html");
+    });
+</script>
+
+</html>
+
