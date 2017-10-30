@@ -73,7 +73,7 @@
 								async: false,
 								success: function(data)
 								{
-									location.href="listOfCars.html";
+									location.href="listAllCars.html";
 								}
 							});
 

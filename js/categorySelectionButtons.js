@@ -65,7 +65,7 @@ function validateMake(make)
 			event.preventDefault(); 
 			return false; 
 	}
-	else if(/[^a-zA-Z]/.test(make))
+	else if(/[^a-zA-Z-, ]/.test(make))
 		{
 			$("#errorMake").text("Only alphabetic characters allowed in the field.").show();
 			//++errorInput; 
@@ -97,7 +97,7 @@ function validateModel(model)
 			event.preventDefault(); 
 			return false; 
 	}
-	else if(/[^a-zA-Z]/.test(model))
+	else if(/[^a-zA-Z-, ]/.test(model))
 		{
 			$("#errorModel").text("Only alphabetic characters allowed in the field.").show();
 			//++errorInput; 
@@ -212,7 +212,7 @@ function validate()
 							infoHtml += '<div class="alert alert-success" role="alert">';
 							infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
 							infoHtml += '<hr>' 
-							infoHtml += '<p class="mb-0">Please click here to <a href="listOfCars.html" class="alert-link">View all cars</a></p>';
+							infoHtml += '<p class="mb-0">Please click here to <a href="listAllCars.html" class="alert-link">View all cars</a></p>';
 							infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
 							infoHtml += '</div>'; 
 

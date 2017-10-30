@@ -32,7 +32,7 @@ $("button #selectCar").click(function(){
         async: false,
         success: function(data)
         {
-            location.href="listOfCars.html";
+            location.href="listAllCars.html";
         }
     });
 
