@@ -1,8 +1,14 @@
 //$(document).ready(function(){
+
+//static link to database
 var URLlink = "http://localhost:8080";
-var info;
+
+//variable to hold the orderId
+var orderID = 0;
+
 //variable to hold the array of href links
 var edit_of_edit_button;
+
 
 //function to make sure the edit href above are triggered
 $("a#edit").click(function(){
@@ -12,33 +18,8 @@ $("a#edit").click(function(){
     //load id into session variable
     sessionStorage.setItem("carId", edit_of_edit_button);
 
-    //open the edit car page
-    //event.preventDefault();
 
 });
-
-//function to make sure the delete href above are triggered
-$("button #selectCar").click(function(){
-    var selectedCar = $(this).val();
-
-    //alert(selectedCar);
-
-    //function to delete data from database
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: URLlink + "/car/deleteCar?",
-        data: "id=" + delete_href,
-        async: false,
-        success: function(data)
-        {
-            location.href="listAllCars.html";
-        }
-    });
-
-});
-
-//function to delete the car from the database based on the id
 
 
 //view cars based on the category id
@@ -74,11 +55,14 @@ $("button").click(function(){
                             htmlData += '</tr>';
                             $("#table tbody").append(htmlData);
                         }
-                        else
-                        {
-                            $("#table tbody").append("No available cars");
-                        }
+
                     }
+                    // else if(m.id != category_button)
+                    // {
+                    //     $("#table tbody").append("No available cars");
+                    //     event.preventDefault();
+                    //
+                    // }
                 });
             });
 
@@ -109,8 +93,28 @@ $("#datepicker2").datepicker({
     }
 });
 
+//sessionStorage.carId
+//function to create order when page loads
+$(function(){
+    var currentDate = new Date();
 
+    var todayDate = currentDate.getDate() + '/' + currentDate.getMonth() + '/'+currentDate.getFullYear();
 
+    var customerId = 1;
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: URLlink + "/order/"+customerId+"/addOrder?",
+        data: "orderDate=" + todayDate,
+        async: false,
+        success: function(data)
+    {
+        //ID for the order number returned when post is used to send data to database
+        orderID = data.id;
+    }
+});
+
+});
 //function to validate the rent date
 function validateRentDate(rentDate)
 {
@@ -215,26 +219,67 @@ function validatePrice(price)
 }
 function validateRent()
 {
-
     var rentDate = validateRentDate($("#datepicker").val());
     var returnDate = validateReturnDate($("#datepicker2").val());
     var price = validatePrice($("#txtPrice").val());
     var days = validateSelectedDays($("#txtDays").val());
-    var car = validateSelectedCar($("#txtCar").val());
+    var carID = validateSelectedCar($("#txtCar").val());
     var category = validateSelectedCategory($("#txtCategory").val());
+
+    //data to be sent to the database
+    var rentData = "rentDate=" +rentDate+ "&returnDate=" +returnDate+ "&totalPrice="+price+"&rentalDays="+days;
 
         //TODO - - - finalize the ajax with order number from the team
         $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: URLlink + "/rent/rentCar?",
-        data: "id=" + sessionStorage.carId,
-        async: false,
-        success: function(data)
-        {
-        //    TODO - - We need order front end
-        }
-    });
+            type: "POST",
+            dataType: "json",
+            url: URLlink + "/rent/" + orderID + "/"+ carID +"/rentCar?",
+            data: rentData,
+            async: false,
+            success: function(data)
+            {
+                //get the data of the car we want hiring out
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: URLlink + "/car/readCar?",
+                    data: "id=" + carID,
+                    async: false,
+                    success: function (data) {
+                        console.log(data.make + "" + data.model + "" + data.year + "" + data.numberPlate + "" + data.status);
+
+                        //variable to change the status of car to false
+                        var status = false;
+
+                        //variable to hold the data for updating the car
+                        var updateCar = "id="+carID+"&make=" +data.make+ "&model="+data.model+"&year="+
+                            data.year+"&numberPlate="+data.numberPlate +
+                                "&status="+status;
+
+                        //update the car status to unavailable (FALSE) when the transaction is done
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: URLlink + "/car/" + category + "/updateCar?",
+                            data: updateCar,
+                            async: false,
+                            success: function (data) {
+                                var infoHtml = "";
+                                infoHtml += '<div class="alert alert-success" role="alert">';
+                                infoHtml += '<h4 class="alert-heading">Your rent was successfull!</h4>';
+                                infoHtml += '<hr>'
+                                infoHtml += '<p class="mb-0">Do you want to order rent another car <a href="rent.html" class="alert-link">Yes</a>' +
+                                    '&nbsp;&nbsp;<a href="invoice.html" class="alert-link">No</a></p>';
+                                infoHtml += '</div>';
+
+                                $("#container").fadeIn().html(infoHtml);
+                            }
+
+                        });
+                    }
+                });
+            }
+        });
 
     event.preventDefault();
 
