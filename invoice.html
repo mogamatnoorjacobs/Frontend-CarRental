@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Invoice</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#header").load("./templates/inc_header.html");
+            $("#footer").load("./templates/inc_footer.html");
+        });
+    </script>
+    <div id="header"></div>
+
+    <div id="container" class="container-fluid">
+    <h3>Invoice</h3>
+
+    <table class="table" id="table">
+        <!--suppress XmlInvalidId -->
+
+        <td>
+
+            <!--Company Details-->
+            <p>
+                <!--suppress XmlInvalidId -->
+                <label for="Company">Symphony Way</label>
+            </p>
+            <p>
+            <!--suppress XmlInvalidId -->
+                <label for="Company">Bellville</label>
+            </p>
+            <p>
+                <!--suppress XmlInvalidId -->
+                <label for="Company">Cape Town</label>
+            </p>
+            <p>
+                <!--suppress XmlInvalidId -->
+                <label for="Company">7535</label>
+            </p>
+            </td>
+            <td>
+                <!--Invoice Details-->
+                <p>
+                <!--suppress XmlInvalidId -->
+                    <label for="invoice"><strong>Invoice No.</strong></label>
+                </p>
+                <!--suppress XmlInvalidId -->
+                <label for="Date"><strong>Invoice Date:</strong></label>
+            </td>
+        </tr>
+
+        <tr><!--Row 2-->
+            <td><!--Client Details-->
+                <!--suppress XmlInvalidId -->
+                <label for="Details"><strong>Client Details:</strong></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="name"></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="surname"><?php echo $Store->getCustomerSurname(); ?></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="cellnumber"><?php echo $Store->getContact(); ?></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="email"><?php echo $Store->getEmail(); ?></label>
+            </td>
+            <td><!--Shipping Details-->
+                <!--suppress XmlInvalidId -->
+                <label for="Shipping"><strong>Shipping To:</strong></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="unitno"><?php echo $Store->getUnitNumber(); ?></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="Street"><?php echo $Store->getStreet(); ?></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="City"><?php echo $Store->getCity(); ?></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="province"><?php echo $Store->getProvince(); ?></label>
+
+                <!--suppress XmlInvalidId -->
+                <label for="postalCode"><?php echo $Store->getPostalCode(); ?></label>
+            </td>
+        </tr>
+        <tr style="text-align:left;">
+            <th>Product Name</th><th>Quantity</th><th>&nbsp;&nbsp;&nbsp;Price&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;SubTotal&nbsp;&nbsp;</th>
+        </tr>
+        </tr>
+    </table>
+    </div>
+    <!--body footer starts here-->
+    <div id="footer">
+
+    </div>

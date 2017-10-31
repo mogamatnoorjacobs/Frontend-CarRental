@@ -100,6 +100,8 @@ $(function(){
 
     var todayDate = currentDate.getDate() + '/' + currentDate.getMonth() + '/'+currentDate.getFullYear();
 
+    //TODO - - - - Dont forget to remove this part in the program
+
     var customerId = 1;
     $.ajax({
         type: "POST",
