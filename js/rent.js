@@ -102,7 +102,8 @@ $(function(){
 
     //TODO - - - - Dont forget to remove this part in the program
 
-    var customerId = 1;
+    var customerId = sessionStorage.customerID;
+    alert(customerId);
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -270,7 +271,7 @@ function validateRent()
                                 infoHtml += '<div class="alert alert-success" role="alert">';
                                 infoHtml += '<h4 class="alert-heading">Your rent was successfull!</h4>';
                                 infoHtml += '<hr>'
-                                infoHtml += '<p class="mb-0">Do you want to order rent another car <a href="rent.html" class="alert-link">Yes</a>' +
+                                infoHtml += '<p class="mb-0">Do you want to rent another car <a href="rent.html" class="alert-link">Yes</a>' +
                                     '&nbsp;&nbsp;<a href="invoice.html" class="alert-link">No</a></p>';
                                 infoHtml += '</div>';
 

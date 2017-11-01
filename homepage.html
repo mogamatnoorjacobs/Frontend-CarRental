@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home page</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#header").load("./templates/inc_header.html");
+            $("#footer").load("./templates/inc_footer.html");
+        });
+    </script>
+    <style>
+        .footer{
+            position:fixed;
+        }
+    </style>
+    <div id="container" class="container-fluid">
+        <div id="header">
+            <!--body starts here-->
+            <script src="js/loadingCategories.js"></script>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h1>Welcome</h1>
+                <div class="form-group row">
+                    <!--suppress XmlInvalidId -->
+
+                    <div class="col-sm-5">
+                        <!--<a href="car.html" type="text" button="" class="form-control">-->
+                            <a href="listAllCars.html" class="btn btn-outline-warning" id="homepageCar">Car</a>
+                    </div>
+                    <div class="col-sm-5">
+                        <!--<a href="car.html" type="text" button="" class="form-control">-->
+                        <a href="listAllCustomers.html" class="btn btn-outline-warning" id="homepageCustomer">Customer</a>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                <div class="col-sm-5">
+                    <!--<a href="car.html" type="text" button="" class="form-control">-->
+                    <a href="listOfRented.html" class="btn btn-outline-warning" id="homepageRented">Rented Cars</a>
+                </div>
+                    <div class="col-sm-5">
+                        <!--<a href="car.html" type="text" button="" class="form-control">-->
+                        <a href="listOfOutstanding.html" class="btn btn-outline-warning"  id="homepageOutstanding">Outstanding Cars</a>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                <div class="col-sm-5">
+                    <!--<a href="car.html" type="text" button="" class="form-control">-->
+                    <a href="transaction.html" class="btn btn-outline-warning" id="homepageTransaction">Rent a car</a>
+                </div>
+                    <div class="col-sm-5">
+                        <!--<a href="car.html" type="text" button="" class="form-control">-->
+                        <a href="returnCar.html" class="btn btn-outline-warning" id="homepageReturn">Return a car</a>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+        <script src="js/bootstrap.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+        <!--body footer starts here-->
+        <br />
+        <div id="footer">
+
+        </div>

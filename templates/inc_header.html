@@ -10,23 +10,42 @@
 
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-      <a class="navbar-brand" href="index.html"><img src="images/car.svg" height="90" weight="90">&nbsp;<span style="font-size: 3em">Vehicle Rentals</span></a>
+      <a class="navbar-brand" href="homepage.html"><img src="images/car.svg" height="90" weight="90">&nbsp;<span style="font-size: 2em">Vehicle Rentals</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="login.html">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="register.html">Register</a>
           </li>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Car
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button" id="carLink" onclick="car()">Add Car</button>
+              <button class="dropdown-item" type="button" id="viewAllCarsLink" onclick="viewAllCars()">View All Cars</button>
+            </div>
+          </div>
+          <li class="nav-item">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Customer
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                <button class="dropdown-item" type="button" onclick="addCustomer()">Add Customer</button>
+                <button class="dropdown-item" type="button" onclick="viewCustomers()">View All Customers</button>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
   <br />
+
   </div>
