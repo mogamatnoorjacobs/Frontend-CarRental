@@ -14,14 +14,14 @@
         });
     </script>
     <div id="header"></div>
-
+    <script src="js/invoice.js"></script>
     <div id="container" class="container-fluid">
     <h3>Invoice</h3>
 
     <table class="table" id="table">
         <!--suppress XmlInvalidId -->
-
-        <td>
+        <tr>
+            <td>
 
             <!--Company Details-->
             <p>
@@ -45,53 +45,72 @@
                 <!--Invoice Details-->
                 <p>
                 <!--suppress XmlInvalidId -->
-                    <label for="invoice"><strong>Invoice No.</strong></label>
+                    <label for="invoice"><strong>Invoice No.</strong><span id="invoiceNo"></span></label>
                 </p>
                 <!--suppress XmlInvalidId -->
-                <label for="Date"><strong>Invoice Date:</strong></label>
+                <label for="Date"><strong>Invoice Date:</strong><span id="invoiceDate"></span></label>
             </td>
         </tr>
 
         <tr><!--Row 2-->
             <td><!--Client Details-->
-                <!--suppress XmlInvalidId -->
-                <label for="Details"><strong>Client Details:</strong></label>
 
-                <!--suppress XmlInvalidId -->
-                <label for="name"></label>
+                <p>
+                    <!--suppress XmlInvalidId -->
+                    <label for="Details"><strong>Client Details:</strong></label>
+                </p>
 
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="surname"><?php echo $Store->getCustomerSurname(); ?></label>
-
+                    <label for="name"><span id="name"></span></label>
+                </p>
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="cellnumber"><?php echo $Store->getContact(); ?></label>
-
+                    <label for="surname"><span id="surname"></span></label>
+                </p>
+                <!--<p>-->
+                <!--&lt;!&ndash;suppress XmlInvalidId &ndash;&gt;-->
+                    <!--<label for="cellnumber"><span id="cellnumber"></span></label>-->
+                <!--</p>-->
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="email"><?php echo $Store->getEmail(); ?></label>
+                    <label for="email"><span id="email"></span></label>
+                </p>
             </td>
-            <td><!--Shipping Details-->
+            <td>
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="Shipping"><strong>Shipping To:</strong></label>
+                    <label for="Address"><strong>Address Details:</strong></label>
+                </p>
+                <p>
+                <!--suppress XmlInvalidId -->
+                    <label for="unitno"><span id="unitno"></span></label>
+                </p>
+                <p>
+                    <!--suppress XmlInvalidId -->
+                    <label for="complex"><span id="complex"></span></label>
+                </p>
+                <p>
+                <!--suppress XmlInvalidId -->
+                    <label for="Street"><span id="street"></span></label>
+                </p>
 
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="unitno"><?php echo $Store->getUnitNumber(); ?></label>
-
+                    <label for="City"><span id="city"></span></label>
+                </p>
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="Street"><?php echo $Store->getStreet(); ?></label>
-
+                    <label for="province"><span id="province"></span></label>
+                </p>
+                <p>
                 <!--suppress XmlInvalidId -->
-                <label for="City"><?php echo $Store->getCity(); ?></label>
-
-                <!--suppress XmlInvalidId -->
-                <label for="province"><?php echo $Store->getProvince(); ?></label>
-
-                <!--suppress XmlInvalidId -->
-                <label for="postalCode"><?php echo $Store->getPostalCode(); ?></label>
+                    <label for="postalCode"><span id="postalCode"></span></label>
+                </p>
             </td>
         </tr>
-        <tr style="text-align:left;">
+        <tr>
             <th>Product Name</th><th>Quantity</th><th>&nbsp;&nbsp;&nbsp;Price&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;SubTotal&nbsp;&nbsp;</th>
-        </tr>
         </tr>
     </table>
     </div>

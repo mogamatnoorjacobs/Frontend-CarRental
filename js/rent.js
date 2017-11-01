@@ -9,17 +9,25 @@ var orderID = 0;
 //variable to hold the array of href links
 var edit_of_edit_button;
 
+//variable to hold the rentID
+var rentId = 0;
+
+//session information for the transaction according to the selected customer
+var sessionData = sessionStorage.sessionInfo;
+
+var customerID = sessionData.split("_")[1];
+
+var invoiceID = sessionData.split("_")[2];
 
 //function to make sure the edit href above are triggered
-$("a#edit").click(function(){
-    edit_of_edit_button = $(this).data('value');
-    //ids = edit_of_edit_button;
-
-    //load id into session variable
-    sessionStorage.setItem("carId", edit_of_edit_button);
-
-
-});
+// $("a#edit").click(function(){
+//     edit_of_edit_button = $(this).data('value');
+//     //ids = edit_of_edit_button;
+//
+//     //load id into session variable
+//    // sessionStorage.setItem("carId", edit_of_edit_button);
+//
+// });
 
 
 //view cars based on the category id
@@ -93,21 +101,20 @@ $("#datepicker2").datepicker({
     }
 });
 
-//sessionStorage.carId
-//function to create order when page loads
+//function to create order and invoice and load to database
 $(function(){
+
+
+
+    //create an order
     var currentDate = new Date();
 
     var todayDate = currentDate.getDate() + '/' + currentDate.getMonth() + '/'+currentDate.getFullYear();
 
-    //TODO - - - - Dont forget to remove this part in the program
-
-    var customerId = sessionStorage.customerID;
-    alert(customerId);
     $.ajax({
         type: "POST",
         dataType: "json",
-        url: URLlink + "/order/"+customerId+"/addOrder?",
+        url: URLlink + "/order/"+customerID+"/addOrder?",
         data: "orderDate=" + todayDate,
         async: false,
         success: function(data)
@@ -240,7 +247,9 @@ function validateRent()
             data: rentData,
             async: false,
             success: function(data)
+
             {
+                rentId = data.id;
                 //get the data of the car we want hiring out
                 $.ajax({
                     type: "GET",
@@ -282,6 +291,26 @@ function validateRent()
                     }
                 });
             }
+        });
+
+        //function to send data to the history table/ history table
+
+        var rented = true;
+        var outstanding = true;
+
+        //data to be sent to the database
+        var invoiceData = "rented=" + rented + "&outstanding="+outstanding;
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: URLlink + "/history/" +invoiceID+ "/" +rentId+"/addHistory",
+            data: invoiceData,
+            async: false,
+            success: function (data) {
+                sessionStorage.setItem("sessionInfo","_" + invoiceID + "_" +rentId + "_"+customerID);
+            }
+
         });
 
     event.preventDefault();
