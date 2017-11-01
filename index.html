@@ -16,9 +16,53 @@
     <div id="header">
         <!--body starts here-->
         <script src="js/loadingCategories.js"></script>
-    </div>
+    </div>.
 
+    <div id="container" class="container-fluid">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h1>Login</h1>
+                <!-- buttons to select the category for the car -->
+                <form name="loginForm" id="loginForm">
+
+                    <!-- Capture Login details -->
+
+                    <!-- Username input textfield -->
+                    <div class="form-group row">
+                        <!--suppress XmlInvalidId -->
+                        <label for="username" class="col-sm-1 col-form-label">Username</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="txtuserID" class="form-control">
+                            <small id="errorUsername" class="text-danger"></small>
+                        </div>
+                    </div>
+                    <!-- End of Username text field  -->
+
+                    <!-- Password input textfield -->
+                    <div class="form-group row">
+                        <!--suppress XmlInvalidId -->
+                        <label for="password" class="col-sm-1 col-form-label">Password</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="txtPassword" class="form-control">
+                            <small id="errorPassword" class="text-danger"></small>
+                        </div>
+                    </div>
+                    <!-- End of Password text field  -->
+
+
+                    <!--Button to submit the form -->
+                    <div class="form-group row">
+                        <input type="submit" name="submitLoginUser" class="btn btn-outline-success" value="Login User" onclick="login(); return false;">
+                    </div>
+                    <!-- End of submit button  -->
+                </form>
+            </li>
+        </ul>
+    </div>
     <!--body footer starts here-->
-    <div id="footer">
+    <div id="footer">  </div>
 
-    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/Login.js"></script>
+
+    </head>
