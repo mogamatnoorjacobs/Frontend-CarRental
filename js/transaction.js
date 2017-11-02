@@ -21,7 +21,6 @@ $(document).ready(function() {
                 async: false,
                 success: function(data)
                 {
-
                     $.each(data, function(k, v){
                         var htmlData = '';
                         htmlData += '<tr>';

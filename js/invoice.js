@@ -14,7 +14,9 @@ $(document).ready(function(){
     var rentID = sessionData.split("_")[2];
 
     var customerId = sessionData.split("_")[3];
-    console.log(sessionData);
+    //console.log(sessionData);
+
+    var invoiceData = [];
 
     //create today's date and display on the html
     var currentDate = new Date();
@@ -25,33 +27,98 @@ $(document).ready(function(){
     $("#invoiceNo").text(invoiceID);
     $("#invoiceDate").text(todayDate);
 
-    //find the customer details of the transaction
+    // //find the customer details of the transaction
+    // $.ajax({
+    //     type: "GET",
+    //     dataType: "json",
+    //     url: URLlink + "/customer/findCustomerByID",
+    //     data: "customerID=" + customerId,
+    //     async: false,
+    //     success: function (data) {
+    //         $("#name").text(data.name);
+    //         $("#surname").text(data.surname);
+    //         $("#email").text(data.email);
+    //         $("#city").text(data.city);
+    //         $("#province").text(data.province);
+    //         $("#complex").text(data.complex);
+    //         $("#street").text(data.street);
+    //         $("#unitno").text(data.houseNumber);
+    //         $("#postalCode").text(data.postalCode);
+    //     }
+    // });
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: URLlink + "/customer/findCustomerByID",
-        data: "customerID=" + customerId,
-        async: false,
-        success: function (data) {
-            $("#name").text(data.name);
-            $("#surname").text(data.surname);
-            $("#email").text(data.email);
-            $("#city").text(data.city);
-            $("#province").text(data.province);
-            $("#complex").text(data.complex);
-            $("#street").text(data.street);
-            $("#unitno").text(data.houseNumber);
-            $("#postalCode").text(data.postalCode);
-        }
-    });
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: URLlink + "/"+invoiceID+"/findAllRentalBasedInvoice?",
+        url: URLlink + "/history/findAll?",
         //data: "customerID=" + customerId,
         async: false,
         success: function (data) {
-            data.id;
+            //console.log(data);
+
+            //loop through history
+            $.each(data, function(history, historyData){
+
+                //console.log(historyData.rent);
+
+                //loop through customer
+                $.each(historyData.invoices, function(customer, customerData){
+                    //console.log(customerData);
+                    //console.log(customerData.name);
+                    $("#name").text(customerData.name);
+                    $("#surname").text(customerData.surname);
+                    $("#email").text(customerData.email);
+                    $("#city").text(customerData.city);
+                    $("#province").text(customerData.province);
+                    $("#complex").text(customerData.complex);
+                    $("#street").text(customerData.street);
+                    $("#unitno").text(customerData.houseNumber);
+                    $("#postalCode").text(customerData.postalCode);
+                });
+                $.each(historyData.rent, function(rent, rentData){
+
+                    console.log(historyData.rent.id);
+                    if(historyData.invoices.id == invoiceID){
+                        console.log(historyData.invoices.id );
+                        // console.log(historyData.rent.totaPrice);
+                        console.log("im in");
+                    }
+
+
+
+                    // htmlData += '<td>invoiced' + q.id+ '</td>';
+                });
+                    //console.log(rent);
+                    //console.log(rentData.rentDate + " " +rentData.totalPrice);
+                    // if(rentID == m.id)
+                    // { htmlData += '<td>rented' + m.totalPrice+ '</td>';
+                    //     htmlData += '</tr>';
+                    //     $("#table tbody").append(htmlData);
+                    // $.each(m, function(k, p){
+                    //     console.log(p);
+                    //     // if(rentID == m.id)
+                    //     // { htmlData += '<td>rented' + m.totalPrice+ '</td>';
+                    //     //     htmlData += '</tr>';
+                    //     //     $("#table tbody").append(htmlData);
+                    //
+                    // });
+                    //loop through invoice
+
+
+
+
+
+
+                // $.each(invoiceData, function(customer, customerData){
+                //     console.log(customerData);
+                //     htmlData += '<td>invoiced' + s.id+ '</td>';
+                // });
+                // //
+                //
+                //
+                //
+                //
+                });
+
             // var htmlData = '';
             // htmlData += '<tr>';
             // htmlData += '<td>' + v.id + '</td>';
