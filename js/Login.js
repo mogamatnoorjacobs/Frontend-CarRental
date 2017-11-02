@@ -1,31 +1,32 @@
 function validate() {
 
-    var userID = validateuserID($("#txtuserID").val());
-    var password = validatePassword($("#txtPassword").val());
+    //var userName = validateuserID($("#txtuserID").val());
+   // var password = validatePassword($("#txtPassword").val());
 
-    if (userID == false || password == false) {
-        event.preventDefault();
-        return;
-    }
-    else {
-        $(document).ready(function () {
+    //if (userName == false || password == false) {
+    //    event.preventDefault();
+    //    return;
+    //}
+   // else {
+       // $(document).ready(function () {
 
-            var userID = "userID=1";
+            var userName = $("#txtuserID").val();
             var URLlink = "http://localhost:8080";
 //statement will load the sedan details
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: URLlink + "/user/findByUserID?",
-                data: userID,
+                url: URLlink + "/user/findByUserName?",
+                data: "name=" + userName,
                 async: false,
                 success: function(data)
                 {
-                    alert(data.name);
+                    console.log(data);
                 }
+            });
+   // });
+//}
 
-
-        });
-    })
-}
+    event.preventDefault();
+    return;
 }

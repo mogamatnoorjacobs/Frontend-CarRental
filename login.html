@@ -15,18 +15,18 @@
     </script>
     <div id="header">
         <!--body starts here-->
-        <script src="js/loadingCategories.js"></script>
-    </div>.
+
+    </div>
 
     <div id="container" class="container-fluid">
         <ul class="list-group">
             <li class="list-group-item">
                 <h1>Login</h1>
                 <!-- buttons to select the category for the car -->
-                <form name="loginForm" id="loginForm">
+                <!--<form name="loginForm" id="loginForm">-->
 
                     <!-- Capture Login details -->
-
+                <script src="js/Login.js"></script>
                     <!-- Username input textfield -->
                     <div class="form-group row">
                         <!--suppress XmlInvalidId -->
@@ -52,10 +52,10 @@
 
                     <!--Button to submit the form -->
                     <div class="form-group row">
-                        <input type="submit" name="submitLoginUser" class="btn btn-outline-success" value="Login User" onclick="login(); return false;">
+                        <input type="submit" name="submitLoginUser" class="btn btn-outline-success" value="Login User" onclick="validate()">
                     </div>
                     <!-- End of submit button  -->
-                </form>
+                <!--</form>-->
             </li>
         </ul>
     </div>
@@ -63,6 +63,6 @@
     <div id="footer">  </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="js/Login.js"></script>
+
 
     </head>
