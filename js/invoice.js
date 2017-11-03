@@ -10,30 +10,41 @@ $(document).ready(function() {
     var sessionData = sessionStorage.sessionInvoiceCustomer;
     var sessionRentals = sessionStorage.arrayRentals;
     var sessionCars = sessionStorage.arrayCars;
-    console.log(sessionData);
+    var sessionHistory = sessionStorage.arrayHistory;
+
     var invoiceID = sessionData.split("_")[1];
 
     var customerId = sessionData.split("_")[2];
 
-    var str = sessionRentals;
-    var str_array = str.split('_');
-    console.log(str);
+    var strHistory = sessionHistory;
+    var strHistory_array = strHistory.split('_');
+    //console.log(strHistory);
+
+    var strRentals = sessionRentals;
+    var strRentals_array = strRentals.split('_');
+    console.log(strRentals);
 
     var strCars = sessionCars;
     var strCars_array = strCars.split('_');
-    console.log(strCars);
+    //console.log(strCars);
 
 
-    var invoiceData = [];
+
 
     //hold values for the car make
     var make = [];
     var model = [];
     var numberPlate = [];
     var subtotal = [];
-    var print = [make, model, numberPlate, subtotal];
-    console.log(print);
+    var print = [[make, model, numberPlate, subtotal]];
+    console.log(print.length);
 
+    var total = 0;
+    var finalTotal = 0;
+    //console.log(print);
+
+    //variable to hold the structure to display to the screen
+    var htmlData = '';
 
     //create today's date and display on the html
     var currentDate = new Date();
@@ -67,81 +78,64 @@ $(document).ready(function() {
         }
     });
 
-    // $.ajax({
-    //     type: "GET",
-    //     dataType: "json",
-    //     url: URLlink + "/history/findAll?",
-    //     //data: "customerID=" + customerId,
-    //     async: false,
-    //     success: function (data) {
-    //         console.log(data);
 
+    //find the history record
+    for (var i = 1; i < strHistory_array.length; i++) {
 
-            //if(historyData.invoices.id == invoiceID)
-            // {
-            //loop through customer
-            //$.each(historyData.invoices, function(customer, customerData){
-            // if(customerData.id == customerId)
-            // {
+        strHistory_array[i] = strHistory_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: URLlink + "/history/findHistoryItem?",
+                data: "historyId=" + strHistory_array[i],
+                async: false,
+                success: function (history) {
+                    //console.log(history); //find the history record
 
-            //   }
-            // });
+                    //get the rentals subtotal price
+                    for (var i = 1; i < strRentals_array.length; i++) {
 
-            //}
-            //loop through history
-            //$.each(data, function (history, historyData) {
-                //find the total price
-                for (var i = 1; i < str_array.length; i++) {
+                        strRentals_array[i] = strRentals_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                    str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-
-                    //if (historyData.rent.id == str_array[i]) {
                         $.ajax({
                             type: "GET",
                             dataType: "json",
                             url: URLlink + "/rent/findRentedItem?",
-                            data: "id=" + str_array[i],
+                            data: "id=" + strRentals_array[i],
                             async: false,
-                            success: function (data) {
-                                subtotal.push(data.totalPrice);
+                            success: function (rent){
+                                console.log(rent.totalPrice);
+                                subtotal.push(rent.totalPrice);
                             }
+
                         });
-                    //}
-                }//end for loop
+                    }
 
-                //find all cars
-                for (var i = 1; i < strCars_array.length; i++) {
+                    //find the car associated with the record
+                    for (var i = 1; i < strCars_array.length; i++) {
 
-                    strCars_array[i] = strCars_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+                        strCars_array[i] = strCars_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
 
-                    //if (historyData.rent.car.id == strCars_array[i]) {
                         $.ajax({
                             type: "GET",
                             dataType: "json",
                             url: URLlink + "/car/readCar?",
-                            data: "id=" + str_array[i],
+                            data: "id=" + strCars_array[i],
                             async: false,
-                            success: function (data) {
-
-                                make.push(data.make);
-                                model.push(data.model);
-                                numberPlate.push(data.numberPlate);
-
+                            success: function (car){
+                                console.log(car);
+                                make.push(car.make);
+                                model.push(car.model);
+                                numberPlate.push(car.numberPlate);
                             }
                         });
-                    //}
-                }//end for loop
+                    }
+                }
+            });
 
-   //          });
-   //
-   //
-   //      }
-   // //});
-
+    }
     for (var i = 0; i < print.length; i++) {
-
-        var htmlData = '';
         htmlData += '<tr>';
         htmlData += '<td>' + make[i] + '</td>';
         htmlData += '<td>' + model[i] + '</td>';
@@ -150,8 +144,28 @@ $(document).ready(function() {
         htmlData += '</tr>';
         $("#table tbody").append(htmlData);
 
+        total = total + subtotal[i];
+
 
     }//end for loop
+    //$("#table tbody").append(total);
+    //$("#table tbody").append(total);
+
+    var vat = total * 0.14;
+    finalTotal = vat + total;
+    var tableData = '';
+    tableData += '<tr>';
+    tableData += '<th> Subtotal: R' + total + '</th>';
+    tableData += '</tr>';
+    tableData += '<tr>';
+    tableData += '<th> Vat (14%): R' + vat.toFixed(2) + '</th>';
+    tableData += '</tr>';
+    tableData += '<tr>';
+    tableData += '<th> Total: R' + finalTotal + '</th>';
+    tableData += '</tr>';
+    $("#results tbody").append(tableData);
+
+
 
 });
 

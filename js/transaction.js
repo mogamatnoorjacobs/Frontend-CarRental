@@ -2,7 +2,7 @@
  * Created by thabomoopa on 01/11/2017.
  */
 $(document).ready(function() {
-
+    sessionStorage.clear();
     //variable to hold the link for the post, get and delete requests
     var URLlink = "http://localhost:8080";
 

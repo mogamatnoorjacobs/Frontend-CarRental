@@ -330,6 +330,13 @@ function validateRent()
         //data to be sent to the database
         var invoiceData = "rented=" + rented + "&outstanding="+outstanding;
 
+        //function to hold the history transactions
+        function appendToHistoryArray(name, data){
+            var old = sessionStorage.getItem(name);
+            if(old === null) old = "";
+            sessionStorage.setItem(name, old +"_"+ data);
+        }
+
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -337,6 +344,10 @@ function validateRent()
             data: invoiceData,
             async: false,
             success: function (data) {
+                alert(data.id);
+                appendToHistoryArray('arrayHistory', data.id);
+
+               // sessionStorage.setItem("arrayHistory", data.id);
 
                 sessionStorage.setItem("sessionInvoiceCustomer","_" + invoiceID +"_"+customerID);
 
