@@ -1,5 +1,5 @@
 
-
+var URLlink = "http://localhost:8080";
 
     function validateName(name) {
         if (name === "") {
@@ -243,7 +243,35 @@
 
 
     function validateEmail(email) {
-        if (email === "") {
+
+        var matchingEmails = null;
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: URLlink + "/customer/findByEmail?",
+            data: "email=" + email,
+            async: false,
+            success: function(response)
+            {
+                //console.log(response);
+                matchingEmails = response.email;
+                //$("#successMessage3").html(matchingEmails + " its empty 3");
+
+            }
+
+        });
+
+        if(email == matchingEmails)
+        {
+            $("#errorEmail").html("The email address already exists, please try again");
+            $("#txtEmail").click(function(){
+                $("#errorEmail").fadeOut('slow');
+            });
+            event.preventDefault();
+            return 0;
+        }
+        else if (email === "") {
             $("#errorEmail").text("Please enter a Email address.").show();
 
             //fade out the error text when the user clicks on the textbox
@@ -255,21 +283,26 @@
             event.preventDefault();
             return false;
         }
-        // else if (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-        // $("#errorEmail").text("This is not a valid email address.").show();
-        //     //++errorInput;
-        //
-        //     //fade out the error text when the user clicks on the textbox
-        //     $("#txtEmail").click(function () {
-        //         $("#errorEmail").fadeOut('slow');
-        //     });
-        //     return false;
-        //
-        //     //prevent the form from being submitted if there is an error
-        //     event.preventDefault();
-        // }
+        else if(validEmail(email) === false) {
+            $("#errorEmail").text("Email is invalid! Please try again.").show();
+            //++errorInput;
+            //fade out the error text when the user clicks on the textbox
+            $("#txtEmail").click(function () {
+                $("#errorEmail").fadeOut('slow');
+            });
+        }
         else
             return email;
+
+        function validEmail(eEmail)
+        {
+            var filter = /^([0-9a-zA-Z]+[-._+&amp;])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/;
+            if(filter.test(eEmail))
+                return true;
+            else
+                return false;
+        }
+
     }
 
 
@@ -294,32 +327,22 @@
         else {
 
             $(document).ready(function () {
+                var customerData =  "name=" + name+ "&surname=" + surname+ "&email=" + email + "&city=" + city +
+                "&province=" + province + "&complex=" + complex + "&street=" + street + "&houseNumber=" + houseNumber + "" +
+                "&postalCode=" + postalCode;
 
                 $.ajax({
-                    url: "http://localhost:8080/customer/addCustomer?" +
-                    "name=" + $("#txtName").val()+ "" +
-                    "&surname=" + $("#txtSurname").val() + "" +
-                    "&email=" + $("#txtEmail").val() + "" +
-                    "&city=" + $("#txtCity").val() + "" +
-                    "&province=" + $("#txtProvince").val() + "" +
-                    "&complex=" + $("#txtComplex").val() + "" +
-                    "&street=" + $("#txtStreet").val() + "" +
-                    "&houseNumber=" + $("#txtHouseNumber").val() + "" +
-                    "&postalCode=" + $("#txtPostalCode").val() + "" +
-                    ""
-
-                }).then(function (data) {
-
-
-                    if (data.toString() !== "") {
-
-                        alert("New Customer Added");
-                    }
-                    else {
+                    type: "POST",
+                    dataType: "json",
+                    url: URLlink + "/customer/addCustomer?",
+                    data: customerData,
+                    success: function (response) {
+                        location.href="listAllCustomers.html";
+                    },
+                    error: function(xhr){
                         alert("Adding Customer Failed");
                     }
-
-                });
+                })
             });
         }
 }

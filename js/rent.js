@@ -118,11 +118,11 @@ $(function(){
         data: "orderDate=" + todayDate,
         async: false,
         success: function(data)
-        {
-            //ID for the order number returned when post is used to send data to database
-            orderID = data.id;
-        }
-    });
+    {
+        //ID for the order number returned when post is used to send data to database
+        orderID = data.id;
+    }
+});
 
 });
 //function to validate the rent date
@@ -227,6 +227,21 @@ function validatePrice(price)
     else
         return price;
 }
+function appendToStorage(name, data){
+    var old = sessionStorage.getItem(name);
+    console.log(old);
+    if(old === null) old = "";
+    sessionStorage.setItem(name, old +"_"+ data);
+}
+
+function appendToCarArray(name, data){
+    var old = sessionStorage.getItem(name);
+    console.log(old);
+    if(old === null) old = "";
+    sessionStorage.setItem(name, old +"_"+ data);
+}
+
+
 function validateRent()
 {
     var rentDate = validateRentDate($("#datepicker").val());
@@ -235,83 +250,110 @@ function validateRent()
     var days = validateSelectedDays($("#txtDays").val());
     var carID = validateSelectedCar($("#txtCar").val());
     var category = validateSelectedCategory($("#txtCategory").val());
-
+    var rentals = [];
+    var myRentIDs;
     //data to be sent to the database
     var rentData = "rentDate=" +rentDate+ "&returnDate=" +returnDate+ "&totalPrice="+price+"&rentalDays="+days;
 
-    //TODO - - - finalize the ajax with order number from the team
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: URLlink + "/rent/" + orderID + "/"+ carID +"/rentCar?",
-        data: rentData,
-        async: false,
-        success: function(data)
+    //function to hold the car id's array
+    appendToCarArray('arrayCars', carID);
 
-        {
-            rentId = data.id;
-            //get the data of the car we want hiring out
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: URLlink + "/car/readCar?",
-                data: "id=" + carID,
-                async: false,
-                success: function (data) {
-                    console.log(data.make + "" + data.model + "" + data.year + "" + data.numberPlate + "" + data.status);
 
-                    //variable to change the status of car to false
-                    var status = false;
 
-                    //variable to hold the data for updating the car
-                    var updateCar = "id="+carID+"&make=" +data.make+ "&model="+data.model+"&year="+
-                        data.year+"&numberPlate="+data.numberPlate +
-                        "&status="+status;
+        //TODO - - - finalize the ajax with order number from the team
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: URLlink + "/rent/" + orderID + "/"+ carID +"/rentCar?",
+            data: rentData,
+            async: false,
+            success: function(data)
 
-                    //update the car status to unavailable (FALSE) when the transaction is done
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        url: URLlink + "/car/" + category + "/updateCar?",
-                        data: updateCar,
-                        async: false,
-                        success: function (data) {
-                            var infoHtml = "";
-                            infoHtml += '<div class="alert alert-success" role="alert">';
-                            infoHtml += '<h4 class="alert-heading">Your rent was successfull!</h4>';
-                            infoHtml += '<hr>'
-                            infoHtml += '<p class="mb-0">Do you want to rent another car <a href="rent.html" class="alert-link">Yes</a>' +
-                                '&nbsp;&nbsp;<a href="invoice.html" class="alert-link">No</a></p>';
-                            infoHtml += '</div>';
+            {
+                //function to hold the rental id array
+                appendToStorage('arrayRentals', data.id);
 
-                            $("#container").fadeIn().html(infoHtml);
-                        }
 
-                    });
-                }
-            });
+
+
+                rentId = data.id;
+
+                //sessionStorage.setItem("arrayRentals",rentals);
+                //get the data of the car we want hiring out
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: URLlink + "/car/readCar?",
+                    data: "id=" + carID,
+                    async: false,
+                    success: function (data) {
+                        console.log(data.make + "" + data.model + "" + data.year + "" + data.numberPlate + "" + data.status);
+
+                        //variable to change the status of car to false
+                        var status = false;
+
+                        //variable to hold the data for updating the car
+                        var updateCar = "id="+carID+"&make=" +data.make+ "&model="+data.model+"&year="+
+                            data.year+"&numberPlate="+data.numberPlate +
+                                "&status="+status;
+
+                        //update the car status to unavailable (FALSE) when the transaction is done
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: URLlink + "/car/" + category + "/updateCar?",
+                            data: updateCar,
+                            async: false,
+                            success: function (data) {
+                                var infoHtml = "";
+                                infoHtml += '<div class="alert alert-success" role="alert">';
+                                infoHtml += '<h4 class="alert-heading">Your rent was successfull!</h4>';
+                                infoHtml += '<hr>'
+                                infoHtml += '<p class="mb-0">Do you want to rent another car <a href="rent.html" class="alert-link">Yes</a>' +
+                                    '&nbsp;&nbsp;<a href="invoice.html" class="alert-link">No</a></p>';
+                                infoHtml += '</div>';
+
+                                $("#container").fadeIn().html(infoHtml);
+                            }
+
+                        });
+                    }
+                });
+            }
+        });
+
+        //function to send data to the history table/ history table
+
+        var rented = true;
+        var outstanding = true;
+
+        //data to be sent to the database
+        var invoiceData = "rented=" + rented + "&outstanding="+outstanding;
+
+        //function to hold the history transactions
+        function appendToHistoryArray(name, data){
+            var old = sessionStorage.getItem(name);
+            if(old === null) old = "";
+            sessionStorage.setItem(name, old +"_"+ data);
         }
-    });
 
-    //function to send data to the history table/ history table
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: URLlink + "/history/" +invoiceID+ "/" +rentId+"/addHistory",
+            data: invoiceData,
+            async: false,
+            success: function (data) {
+                alert(data.id);
+                appendToHistoryArray('arrayHistory', data.id);
 
-    var rented = true;
-    var outstanding = true;
+               // sessionStorage.setItem("arrayHistory", data.id);
 
-    //data to be sent to the database
-    var invoiceData = "rented=" + rented + "&outstanding="+outstanding;
+                sessionStorage.setItem("sessionInvoiceCustomer","_" + invoiceID +"_"+customerID);
 
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: URLlink + "/history/" +invoiceID+ "/" +rentId+"/addHistory",
-        data: invoiceData,
-        async: false,
-        success: function (data) {
-            sessionStorage.setItem("sessionInfo","_" + invoiceID + "_" +rentId + "_"+customerID);
-        }
+            }
 
-    });
+        });
 
     event.preventDefault();
 

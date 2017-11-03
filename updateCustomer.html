@@ -45,7 +45,7 @@
                         <!--suppress XmlInvalidId -->
                         <label for="email" class="col-sm-1 col-form-label">Email</label>
                         <div class="col-sm-5">
-                            <input type="text" id="txtEmail" class="form-control">
+                            <input type="text" readonly id="txtEmail" class="form-control">
                             <small id="errorEmail" class="text-danger"></small>
                         </div>
                     </div>
@@ -137,13 +137,15 @@
         </ul>
     </div>
 </head>
-
+<br />
     <!--body footer starts here-->
     <div id="footer"></div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="js/updateCustomer.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 
     <script>
         $(document).ready(function() {

@@ -49,7 +49,7 @@ if it's load then it will prevent the data from being loaded again.
 		{
 			//statement will load the sedan details
 			$.ajax({
-			type: "GET",
+			type: "POST",
 			dataType: "json",
 			url: URLlink + "/category/addCategory?",
 			data: sedan,
@@ -58,7 +58,7 @@ if it's load then it will prevent the data from being loaded again.
 			{ 
 				//statement will load the SUV details
 				$.ajax({
-				type: "GET",
+				type: "POST",
 				dataType: "json",
 				url: URLlink + "/category/addCategory?",
 				data: SUV,
@@ -67,7 +67,7 @@ if it's load then it will prevent the data from being loaded again.
 				{ 
 					//statement will load the Limos details
 					$.ajax({
-					type: "GET",
+					type: "POST",
 					dataType: "json",
 					url: URLlink + "/category/addCategory?",
 					data: Limos,
@@ -76,7 +76,7 @@ if it's load then it will prevent the data from being loaded again.
 					{ 
 						//statement will load the Buses details
 						$.ajax({
-						type: "GET",
+						type: "POST",
 						dataType: "json",
 						url: URLlink + "/category/addCategory?",
 						data: Buses,
@@ -85,7 +85,7 @@ if it's load then it will prevent the data from being loaded again.
 						{ 
 							//statement will load the Trailers details
 							$.ajax({
-							type: "GET",
+							type: "POST",
 							dataType: "json",
 							url: URLlink + "/category/addCategory?",
 							data: Trailers,
