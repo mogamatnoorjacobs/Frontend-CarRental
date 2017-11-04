@@ -19,15 +19,6 @@ var customerID = sessionData.split("_")[1];
 
 var invoiceID = sessionData.split("_")[2];
 
-//function to make sure the edit href above are triggered
-// $("a#edit").click(function(){
-//     edit_of_edit_button = $(this).data('value');
-//     //ids = edit_of_edit_button;
-//
-//     //load id into session variable
-//    // sessionStorage.setItem("carId", edit_of_edit_button);
-//
-// });
 
 
 //view cars based on the category id
@@ -103,9 +94,6 @@ $("#datepicker2").datepicker({
 
 //function to create order and invoice and load to database
 $(function(){
-
-
-
     //create an order
     var currentDate = new Date();
 
@@ -344,10 +332,9 @@ function validateRent()
             data: invoiceData,
             async: false,
             success: function (data) {
-                alert(data.id);
+
                 appendToHistoryArray('arrayHistory', data.id);
 
-               // sessionStorage.setItem("arrayHistory", data.id);
 
                 sessionStorage.setItem("sessionInvoiceCustomer","_" + invoiceID +"_"+customerID);
 
