@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Car</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#header").load("./templates/inc_header.html");
+            $("#footer").load("./templates/inc_footer.html");
+        });
+    </script>
+    <div id="header"></div>
+
+    <!--Body starts here-->
+    <div id="container" class="container-fluid">
+        <h1>All Cars</h1>
+        <hr />
+            <div id="categoryButtons"></div>
+
+        <hr />
+        <a href="" class="btn btn-outline-warning" id="availableCars">Available Cars </a>
+        <a href="" class="btn btn-outline-warning" id="unavailableCars">Unavailable Cars</a>
+        <br />
+        <br />
+
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                    <th>ID</th><th>Make</th><th>Model</th><th>Year</th><th>Number Plate</th><th>Available To Rent</th><th>Action</th>
+                </tr>
+            <thead>
+                <tbody>
+                <script src="js/listofcars.js"></script>
+            <div id="editAndDeleteButtons"></div>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <!--body footer starts here-->
+    <br />
+    <div id="footer"></div>

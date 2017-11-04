@@ -73,7 +73,7 @@
 								async: false,
 								success: function(data)
 								{
-									location.href="listOfCars.html";
+									location.href="listAllCars.html";
 								}
 							});
 
@@ -132,4 +132,107 @@
 
 					});
 			});
+
+			$("a#availableCars").click(function(){
+				//alert("available");
+				var valueTrue = true;
+                $.ajax({
+                type: "GET",
+                    dataType: "json",
+                    url: URLlink + "/car/readAllCars?",
+                    //data: name,
+                    async: false,
+                    success: function(car)
+                {
+                	//console.log(car);
+                    //$("#container").hide();
+                    $("#table tbody").empty();
+                    //$.each(car, function(k, v){
+							//console.log(v);
+                        $.each(car, function(l, m){
+								//console.log(m.status);
+                            event.preventDefault();
+                            if(valueTrue == m.status){
+                                var htmlData = '';
+                                htmlData += '<tr>';
+                                htmlData += '<td>' + m.id + '</td>';
+                                htmlData += '<td>' + m.make + '</td>';
+                                htmlData += '<td>' + m.model + '</td>';
+                                htmlData += '<td>' + m.year + '</td>';
+                                htmlData += '<td>' + m.numberPlate + '</td>';
+                                htmlData += '<td>' + m.status + '</td>';
+                                htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+m.id+'" id="edit">Edit</a><a href="" class="btn btn-outline-danger" data-value="'+m.id+'" id="delete">Delete</a><br /></td>';
+                                htmlData += '</tr>';
+                                $("#table tbody").append(htmlData);
+
+                            }
+                        });
+                   // });
+
+                    //function to make sure that the href tags in the inner loop are triggered
+                    $("a").click(function(){
+                        edit_of_edit_button = $(this).data('value'); // would be 5
+
+                        //load id into session variable
+                        sessionStorage.setItem("carId", edit_of_edit_button);
+
+                        //open the edit car page
+                        //location.href="editCar.html";
+                        event.preventDefault();
+                    });
+                }
+
+            });
+			});
+$("a#unavailableCars").click(function(){
+    //alert("available");
+    var valueTrue = false;
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: URLlink + "/car/readAllCars?",
+        //data: name,
+        async: false,
+        success: function(car)
+        {
+            //console.log(car);
+            //$("#container").hide();
+            $("#table tbody").empty();
+            //$.each(car, function(k, v){
+            //console.log(v);
+            $.each(car, function(l, m){
+                //console.log(m.status);
+                event.preventDefault();
+                if(valueTrue == m.status){
+                    var htmlData = '';
+                    htmlData += '<tr>';
+                    htmlData += '<td>' + m.id + '</td>';
+                    htmlData += '<td>' + m.make + '</td>';
+                    htmlData += '<td>' + m.model + '</td>';
+                    htmlData += '<td>' + m.year + '</td>';
+                    htmlData += '<td>' + m.numberPlate + '</td>';
+                    htmlData += '<td>' + m.status + '</td>';
+                    htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+m.id+'" id="edit">Edit</a><a href="" class="btn btn-outline-danger" data-value="'+m.id+'" id="delete">Delete</a><br /></td>';
+                    htmlData += '</tr>';
+                    $("#table tbody").append(htmlData);
+
+                }
+            });
+            // });
+
+            //function to make sure that the href tags in the inner loop are triggered
+            $("a").click(function(){
+                edit_of_edit_button = $(this).data('value'); // would be 5
+
+                //load id into session variable
+                sessionStorage.setItem("carId", edit_of_edit_button);
+
+                //open the edit car page
+                //location.href="editCar.html";
+                event.preventDefault();
+            });
+        }
+
+    });
+});
 		//});

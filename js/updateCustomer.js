@@ -339,10 +339,18 @@ function validate() {
 
                 if (data.toString() !== "") {
 
-                    alert("Customer Updated");
+                    var infoHtml = "";
+                    infoHtml += '<div class="alert alert-success" role="alert">';
+                    infoHtml += '<h4 class="alert-heading">You successfully updated the details!</h4>';
+                    infoHtml += '<hr>'
+                    infoHtml += '<p class="mb-0">Do you want to order rent another car <a href="rent.html" class="alert-link">Yes</a>' +
+                        '&nbsp;&nbsp;<a href="invoice.html" class="alert-link">No</a></p>';
+                    infoHtml += '</div>';
+
+                    $("#container").fadeIn().html(infoHtml);
                 }
                 else {
-                    alert("Customer Updated");
+                    alert("Error Updating the customer details");
                 }
 
             });
