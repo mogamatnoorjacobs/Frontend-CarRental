@@ -239,14 +239,13 @@ function validateRent()
     var carID = validateSelectedCar($("#txtCar").val());
     var category = validateSelectedCategory($("#txtCategory").val());
     var rentals = [];
+    var outstanding = true;
     var myRentIDs;
     //data to be sent to the database
-    var rentData = "rentDate=" +rentDate+ "&returnDate=" +returnDate+ "&totalPrice="+price+"&rentalDays="+days;
+    var rentData = "rentDate=" +rentDate+ "&returnDate=" +returnDate+ "&totalPrice="+price+"&rentalDays="+days+"&outstanding="+outstanding;
 
     //function to hold the car id's array
     appendToCarArray('arrayCars', carID);
-
-
 
         //TODO - - - finalize the ajax with order number from the team
         $.ajax({
@@ -260,9 +259,6 @@ function validateRent()
             {
                 //function to hold the rental id array
                 appendToStorage('arrayRentals', data.id);
-
-
-
 
                 rentId = data.id;
 

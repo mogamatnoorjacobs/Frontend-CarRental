@@ -9,8 +9,6 @@ $(document).ready(function() {
     //session information for the transaction according to the selected customer
     var sessionData = sessionStorage.sessionInvoiceCustomer;
     var sessionRentals = sessionStorage.arrayRentals;
-    var sessionCars = sessionStorage.arrayCars;
-    var sessionHistory = sessionStorage.arrayHistory;
 
     var invoiceID = sessionData.split("_")[1];
 
@@ -18,6 +16,8 @@ $(document).ready(function() {
 
     var strRentals = sessionRentals;
     var strRentals_array = strRentals.split('_');
+    strRentals_array.shift();
+    console.log(strRentals_array);
 
     //hold values for the car make
     var make = [];
@@ -27,7 +27,7 @@ $(document).ready(function() {
     var print = [];
 
     var total = 0;
-    //console.log(print);
+
 
 
 
@@ -64,7 +64,7 @@ $(document).ready(function() {
     });
 
     //
-    // //find the rents done record
+
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -74,23 +74,24 @@ $(document).ready(function() {
         success: function (rent) {
             $.each(rent, function(key, value) {
 
-                if(value.id = strRentals_array[key])
-                {
+                console.log(value.id = strRentals_array[key]);
+                    if(value.id = strRentals_array[key])
+                    {
+
                     print.push(value.id);
                     make.push(value.car.make);
                     model.push(value.car.model);
                     numberPlate.push(value.car.numberPlate);
                     subtotal.push(value.totalPrice);
                 }
-
             });
 
         }
     });
 
-    //console.log(print);
-    console.log(print.length);
-    for (var i = 0; i < print.length; i++) {
+    ///console.log(print);
+   // console.log(make.length);
+    for (var i = 0; i < make.length; i++) {
         //variable to hold the structure to display to the screen
         var htmlData = '';
         htmlData += '<tr>';
@@ -121,7 +122,7 @@ $(document).ready(function() {
     tableData += '</tr>';
     $("#results tbody").append(tableData);
 
-
+    //console.log(display);
 
 });
 
