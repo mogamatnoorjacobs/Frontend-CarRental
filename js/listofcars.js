@@ -37,7 +37,7 @@
 										htmlData += '<td>' + v.year + '</td>';
 										htmlData += '<td>' + v.numberPlate + '</td>';
                                     	htmlData += '<td>' + v.status + '</td>';
-										htmlData += '<td><a href="editCar.html" class="btn btn-outline-warning" data-value="'+v.id+'" id="edit">Edit</a><a href="listOfCars.php" class="btn btn-outline-danger" data-value="'+v.id+'" id="delete" >Delete</a><br /></td>';
+										htmlData += '<td><a href="editCar.html" class="btn btn-outline-warning" data-value="'+v.id+'" id="edit">Edit</a><a href="listAllCars.html" class="btn btn-outline-danger" data-value="'+v.id+'" id="delete" >Delete</a><br /></td>';
 										htmlData += '</tr>';
 										$("#table tbody").append(htmlData);
 							   		});
@@ -67,7 +67,7 @@
 							//function to delete data from database
 							$.ajax({
 								type: "GET",
-								dataType: "json",
+								//dataType: "json",
 								url: URLlink + "/car/deleteCar?",
 								data: "id=" + delete_href,
 								async: false,
@@ -76,10 +76,8 @@
 									location.href="listAllCars.html";
 								}
 							});
-
+                        event.preventDefault();
 							});
-
-					//function to delete the car from the database based on the id
 
 
 			//view cars based on the category id
@@ -164,6 +162,7 @@
                                 htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+m.id+'" id="edit">Edit</a><a href="" class="btn btn-outline-danger" data-value="'+m.id+'" id="delete">Delete</a><br /></td>';
                                 htmlData += '</tr>';
                                 $("#table tbody").append(htmlData);
+                                event.preventDefault();
 
                             }
                         });

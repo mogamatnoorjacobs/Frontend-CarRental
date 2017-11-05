@@ -322,7 +322,7 @@ function validate() {
 
             $.ajax({
                 url: "http://localhost:8080/customer/updateCustomer?" +
-                "id=" + ParametersArray[1] + "" +
+                "customerId=" + ParametersArray[1] + "" +
                 "&name=" + $("#txtName").val()+ "" +
                 "&surname=" + $("#txtSurname").val() + "" +
                 "&email=" + $("#txtEmail").val() + "" +
@@ -343,8 +343,7 @@ function validate() {
                     infoHtml += '<div class="alert alert-success" role="alert">';
                     infoHtml += '<h4 class="alert-heading">You successfully updated the details!</h4>';
                     infoHtml += '<hr>'
-                    infoHtml += '<p class="mb-0">Do you want to order rent another car <a href="rent.html" class="alert-link">Yes</a>' +
-                        '&nbsp;&nbsp;<a href="invoice.html" class="alert-link">No</a></p>';
+                    infoHtml += '<p class="mb-0">Click <a href="listAllCustomers.html" class="alert-link">HERE</a> to return to the list of customers</p>';
                     infoHtml += '</div>';
 
                     $("#container").fadeIn().html(infoHtml);
