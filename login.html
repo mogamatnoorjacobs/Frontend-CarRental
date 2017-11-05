@@ -29,34 +29,7 @@
     var URLlink = "http://localhost:8080";
     function validateEmail(email) {
 
-        var matchingEmails = null;
-
-        $.ajax({
-            type: "GET",
-            dataType: "json",
-            url: URLlink + "/user/findByName?",
-            data: "email=" + email,
-            async: false,
-            success: function(response)
-            {
-                //console.log(response);
-                matchingEmails = response.name;
-                //$("#successMessage3").html(matchingEmails + " its empty 3");
-
-            }
-
-        });
-
-        if(email == matchingEmails)
-        {
-            $("#errorEmail").html("The email address already exists, please try again");
-            $("#txtEmail").click(function(){
-                $("#errorEmail").fadeOut('slow');
-            });
-            event.preventDefault();
-            return 0;
-        }
-        else if (email === "") {
+         if (email === "") {
             $("#errorEmail").text("Please enter a Email address.").show();
 
             //fade out the error text when the user clicks on the textbox
@@ -151,8 +124,9 @@
     }
 
 </script>
-<script src="js/Login.js"></script>
+
 <div id="container" class="container-fluid">
+    <script src="js/Login.js"></script>
         <ul class="list-group">
             <li class="list-group-item">
                 <h1>Login</h1>
