@@ -20,10 +20,10 @@
                     <!-- Name input textfield -->
                     <div class="form-group row">
                         <!--suppress XmlInvalidId -->
-                        <label for="name" class="col-sm-1 col-form-label">Name</label>
+                        <label for="email" class="col-sm-1 col-form-label">Email</label>
                         <div class="col-sm-5">
-                            <input type="text" id="txtName" class="form-control">
-                            <small id="errorName" class="text-danger"></small>
+                            <input type="text" id="txtEmail" class="form-control">
+                            <small id="errorEmail" class="text-danger"></small>
                         </div>
                     </div>
                     <!-- End of Name text field  -->
@@ -45,34 +45,21 @@
                         <!--suppress XmlInvalidId -->
                         <label for="password" class="col-sm-1 col-form-label">Password</label>
                         <div class="col-sm-5">
-                            <input type="text" id="txtPassword" class="form-control">
+                            <input type="password" id="txtPassword" class="form-control">
                             <small id="errorPassword" class="text-danger"></small>
+                        </div>
+                    </div>
+                    <!-- Password input textfield -->
+                    <div class="form-group row">
+                        <!--suppress XmlInvalidId -->
+                        <label for="password" class="col-sm-1 col-form-label">Confirm Password</label>
+                        <div class="col-sm-5">
+                            <input type="password" id="txtConfirm" class="form-control">
+                            <small id="errorConfirmPassword" class="text-danger"></small>
                         </div>
                     </div>
                     <!-- End of Password text field  -->
 
-                    <!-- House Number Plate input textfield -->
-                    <div class="form-group row">
-                        <!--suppress XmlInvalidId -->
-                        <label for="role" class="col-sm-1 col-form-label">Role</label>
-                        <div class="col-sm-5">
-                            <input type="text" id="txtRole" class="form-control">
-                            <small id="errorRole" class="text-danger"></small>
-                        </div>
-                    </div>
-                    <!-- End of Role text field  -->
-
-
-                    <!-- House Number Plate input textfield -->
-                    <div class="form-group row">
-                        <!--suppress XmlInvalidId -->
-                        <label for="email" class="col-sm-1 col-form-label">Email</label>
-                        <div class="col-sm-5">
-                            <input type="text" id="txtEmail" class="form-control">
-                            <small id="errorEmail" class="text-danger"></small>
-                        </div>
-                    </div>
-                    <!-- End of Role text field  -->
                     <!--Button to submit the form -->
                     <div class="form-group row">
                         <input type="submit" name="submitUserRegistration" class="btn btn-outline-success" value="Add User" onclick="validate(); return false;">
