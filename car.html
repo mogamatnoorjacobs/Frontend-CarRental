@@ -24,7 +24,7 @@
                 <span id="categoryList"></span>
                 <br />
 
-                <form name="carForm" id="carForm" method="post" action="<?php $_SERVER['SCRIPT_NAME']; ?>">
+                <!--<form name="carForm" id="carForm" method="post">&ndash;&gt;-->
 
 
                     <!-- Details for the car you are inserting -->
@@ -85,13 +85,14 @@
                         </div>
                     </div>
                     <!-- End of Quantity text field  -->
-
+                    <script src="js/addCar.js"></script>
                     <!--Button to submit the form -->
                     <div class="form-group row">
-                        <input type="submit" name="submitAddCar" class="btn btn-outline-success" value="Add Car" onclick="validate()">
+                        <!--<input type="submit" name="submitAddCar" class="btn btn-outline-success" value="Add Car" onclick="addCar()" />-->
+                        <button class="btn btn-outline-success" onclick="addCar()" >Add Car</button>
                     </div>
                     <!-- End of submit button  -->
-                </form>
+                <!--</form>-->
             </li>
         </ul>
     </div>

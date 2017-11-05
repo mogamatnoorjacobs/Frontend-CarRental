@@ -53,6 +53,7 @@ $("button").click(function(){
                             htmlData += '<td><button class="btn btn-outline-warning" value="'+v.id+'" id="selectCar">Select</button><br /></td>';
                             htmlData += '</tr>';
                             $("#table tbody").append(htmlData);
+                            event.preventDefault();
                         }
 
                     }
@@ -283,7 +284,7 @@ function validateRent()
 
                         //update the car status to unavailable (FALSE) when the transaction is done
                         $.ajax({
-                            type: "POST",
+                            type: "GET",
                             dataType: "json",
                             url: URLlink + "/car/" + category + "/updateCar?",
                             data: updateCar,

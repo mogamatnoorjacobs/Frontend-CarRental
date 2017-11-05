@@ -25,6 +25,8 @@ $(document).ready(function(){
 });
 
 
+
+
 //function to validate the category input
 function validateCategory(categoryNumber)
 {
@@ -85,7 +87,7 @@ function validateModel(model)
 			event.preventDefault();
 			return false;
 	}
-	else if(/[^a-zA-Z-, ]/.test(model))
+	else if(/[^a-zA-Z0-9-., ]/.test(model))
 		{
 			$("#errorModel").text("Only alphabetic characters allowed in the field.").show();
 			//++errorInput;
@@ -150,7 +152,7 @@ function validateNumberPlate(numberPlate)
         event.preventDefault();
         return false;
     }
-    else if(/[^A-Z0-9-]/.test(numberPlate))
+    else if(/[^A-Z0-9-, ]/.test(numberPlate))
     {
         $("#errorNumberPlate").text("Only Capital letters allowed in the field.").show();
         //++errorInput;
@@ -179,6 +181,7 @@ function validate()
 	var numberPlate = validateNumberPlate($("#txtNumberPlate").val());
     var status = $("#txtStatus").val();
 
+
 	var data = "id=" + sessionData + "&make=" + make + "&model="+model+"&year="+year+"&numberPlate="+numberPlate+"&status="+status;
 	event.preventDefault();
 
@@ -190,24 +193,41 @@ function validate()
 	else
 	{
 
-		$.ajax({
-			type: "GET",
-			dataType: "json",
-			url: URLlink + "/car/updateCar?",
-			data: data,
-			async: false,
-			success: function(data)
-			{
-							var infoHtml = "";
-							infoHtml += '<div class="alert alert-success" role="alert">';
-							infoHtml += '<h4 class="alert-heading">Successfully Updated: ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
-							infoHtml += '<hr>'
-							infoHtml += '<p class="mb-0">Please click here to <a href="listAllCars.html" class="alert-link">View all cars</a></p>';
-							infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
-							infoHtml += '</div>';
 
-							$("#container").fadeIn().html(infoHtml);
-			}
-		});
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: URLlink + "/car/readCar?",
+            data: "id=" + sessionData,
+            async: false,
+            success: function(car)
+            {
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: URLlink + "/car/"+car.category.id+"/updateCar?",
+                    data: data,
+                    async: false,
+                    success: function(data)
+                    {
+                        var infoHtml = "";
+                        infoHtml += '<div class="alert alert-success" role="alert">';
+                        infoHtml += '<h4 class="alert-heading">Successfully Updated: ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
+                        infoHtml += '<hr>'
+                        infoHtml += '<p class="mb-0">Please click here to <a href="listAllCars.html" class="alert-link">View all cars</a></p>';
+                        infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
+                        infoHtml += '</div>';
+
+                        $("#container").fadeIn().html(infoHtml);
+                    }
+                });
+            }
+        });
+
+
+
+
+
 	}
 }
