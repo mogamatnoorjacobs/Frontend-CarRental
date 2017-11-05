@@ -84,14 +84,32 @@ $("a#returnCar").click(function(){
             $.each(rent, function(key, value){
                 console.log(rent);
                 if(value.id == returnCarRentID){
+                    var outstanding = false;
                     console.log(value.outstanding);
-                    console.log(value.car.id);
-                    console.log(value.car.category.id);
                     console.log(value.order.id);
+                    console.log(value.car.id);
+
+                    var rentData = "rentId=" +returnCarRentID+"&rentDate="+value.rentDate+"&returnDate="+value.returnDate+"&totalPrice="
+                        +value.totalPrice+"&rentalDays="+value.rentalDays+"&outstanding="+outstanding;
+
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: URLlink + "/rent/"+value.order.id+"/"+value.car.id+"/updateRent?",
+                        data: rentData,
+                        async: false,
+                        success: function (car){
+                            console.log("updated outstanding");
+                        }
+
+                    });
+
+                    var status = true;
                     var data = "id=" + value.car.id +
-                        "make=" + value.car.make + "&model="+value.car.model+
+                        "&make=" + value.car.make + "&model="+value.car.model+
                         "&year="+value.car.year+"&numberPlate="+value.car.numberPlate+
-                        "&status=false";
+                        "&status="+status;
+
                     $.ajax({
                         type: "GET",
                         dataType: "json",
@@ -99,7 +117,7 @@ $("a#returnCar").click(function(){
                         data: data,
                         async: false,
                         success: function (car){
-                            alert("car updated");
+                            location.href="outstandingRentals.html";
                         }
 
                     });

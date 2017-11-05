@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     var strRentals = sessionRentals;
     var strRentals_array = strRentals.split('_');
-   // strRentals_array.shift();
+    strRentals_array.shift();
     console.log(strRentals_array);
 
     //hold values for the car make
