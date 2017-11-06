@@ -3,22 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Home page</title>
+    <title>Login</title>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="css/navigation.css">
 
-    <script>
-        $(document).ready(function() {
-            $("#header").load("./templates/inc_header.html");
-            $("#footer").load("./templates/inc_footer.html");
-        });
-    </script>
-    <div id="header">
-        <!--body starts here-->
+</head>
+<body>
 
-    </div>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand"><img src="images/car.svg" height="90" weight="90">&nbsp;<span style="font-size: 2em">Vehicle Rentals</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <br />
+</div>
 
-    <div id="container" class="container-fluid">
+<script>
+    var URLlink = "http://localhost:8080";
+    function validateEmail(email) {
+
+         if (email === "") {
+            $("#errorEmail").text("Please enter a Email address.").show();
+
+            //fade out the error text when the user clicks on the textbox
+            $("#txtEmail").click(function () {
+                $("#errorEmail").fadeOut('slow');
+            });
+
+            //prevent the form from being submitted if there is an error
+            event.preventDefault();
+            return false;
+        }
+        else if(validEmail(email) === false) {
+            $("#errorEmail").text("Email is invalid! Please try again.").show();
+            //++errorInput;
+            //fade out the error text when the user clicks on the textbox
+            $("#txtEmail").click(function () {
+                $("#errorEmail").fadeOut('slow');
+            });
+        }
+        else
+            return email;
+
+        function validEmail(eEmail)
+        {
+            var filter = /^([0-9a-zA-Z]+[-._+&amp;])*[0-9a-zA-Z]+@([-0-9a-zA-Z]+[.])+[a-zA-Z]{2,6}$/;
+            if(filter.test(eEmail))
+                return true;
+            else
+                return false;
+        }
+
+    }
+
+
+    function validatePassword(password) {
+        if (password === "") {
+            $("#errorPassword").text("Please enter a password.").show();
+
+            //fade out the error text when the user clicks on the textbox
+            $("#txtPassword").click(function () {
+                $("#errorPassword").fadeOut('slow');
+            });
+
+            //prevent the form from being submitted if there is an error
+            event.preventDefault();
+            return false;
+        }
+        else if (/[^a-zA-Z0-9-, ]/.test(password)) {
+            $("#errorPassword").text("Only alphabetic characters allowed in the field.").show();
+            //++errorInput;
+
+            //fade out the error text when the user clicks on the textbox
+            $("#txtPassword").click(function () {
+                $("#errorPassword").fadeOut('slow');
+            });
+            return false;
+
+            //prevent the form from being submitted if there is an error
+            event.preventDefault();
+        }
+        else if(password.length <6)
+        {
+            $("#errorPassword").text("Password is too short, length of password must be greater than 6 characters.").show();
+            //++errorInput;
+            //fade out the error text when the user clicks on the textbox
+            $("#txtPassword").click(function(){
+                $("#errorPassword").fadeOut('slow');
+            });
+            return 0;
+
+            //prevent the form from being submitted if there is an error
+            event.preventDefault();
+        }
+        else
+            return password;
+    }
+
+    function validateLogin() {
+
+        var email = validateEmail($("#txtEmail").val());
+        var password = validatePassword($("#txtPassword").val());
+
+        if (email == false || password == false) {
+            event.preventDefault();
+            return;
+        }
+        else {
+            location.href = "homepage.html";
+            event.preventDefault();
+            return;
+        }
+    }
+
+</script>
+
+<div id="container" class="container-fluid">
+    <script src="js/Login.js"></script>
         <ul class="list-group">
             <li class="list-group-item">
                 <h1>Login</h1>
@@ -26,14 +134,15 @@
                 <!--<form name="loginForm" id="loginForm">-->
 
                     <!-- Capture Login details -->
-                <script src="js/Login.js"></script>
+<form name="login" id="login" method="post" >
+
                     <!-- Username input textfield -->
                     <div class="form-group row">
                         <!--suppress XmlInvalidId -->
                         <label for="username" class="col-sm-1 col-form-label">Username</label>
                         <div class="col-sm-5">
-                            <input type="text" id="txtuserID" class="form-control">
-                            <small id="errorUsername" class="text-danger"></small>
+                            <input type="text" id="txtEmail" placeholder="Enter an email" class="form-control">
+                            <small id="errorEmail" class="text-danger"></small>
                         </div>
                     </div>
                     <!-- End of Username text field  -->
@@ -43,7 +152,7 @@
                         <!--suppress XmlInvalidId -->
                         <label for="password" class="col-sm-1 col-form-label">Password</label>
                         <div class="col-sm-5">
-                            <input type="text" id="txtPassword" class="form-control">
+                            <input type="password" id="txtPassword" class="form-control">
                             <small id="errorPassword" class="text-danger"></small>
                         </div>
                     </div>
@@ -52,17 +161,25 @@
 
                     <!--Button to submit the form -->
                     <div class="form-group row">
-                        <input type="submit" name="submitLoginUser" class="btn btn-outline-success" value="Login User" onclick="validate()">
+                        <button type="submit" name="submitAddCar" class="btn btn-outline-success" value="Login" onclick="validateLogin()">Login</button>
                     </div>
                     <!-- End of submit button  -->
-                <!--</form>-->
+                </form>
             </li>
         </ul>
+
+    <br />
+
+    <div class="container-fluid">
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted text-center">Developers: Thabo | Noor | JP | McDave | Watson</p>
+            </div>
+        </footer>
+        <script src="js/bootstrap.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     </div>
-    <!--body footer starts here-->
-    <div id="footer">  </div>
+</div>
+</body>
+</html>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-
-    </head>

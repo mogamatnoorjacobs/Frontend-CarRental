@@ -2,6 +2,8 @@
 *	It will run on the background so that your database is populated with the categories
 */ 
 
+$(document).ready(function(){
+
 
 //Static data for the different categories 
 var categories = "Sedan,450,SUV,500,Limos,1000,Trailers,2000,Buses,600";
@@ -25,7 +27,7 @@ var SUV = "name=SUV&price=500";
 var Limos = "name=Limos&price=1000";
 var Trailers = "name=Trailers&price=2000";
 var Buses = "name=Buses&price=600";
-var available;
+var available ='';
 
 /*Statement will check the database to see if the Sedan category is loaded already, 
 if it's load then it will prevent the data from being loaded again.
@@ -105,4 +107,5 @@ if it's load then it will prevent the data from being loaded again.
 		}); 
 
 }
-		
+
+});

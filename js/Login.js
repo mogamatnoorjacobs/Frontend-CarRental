@@ -1,31 +1,43 @@
-function validate() {
-
-    //var userName = validateuserID($("#txtuserID").val());
-    // var password = validatePassword($("#txtPassword").val());
-
-    //if (userName == false || password == false) {
-    //    event.preventDefault();
-    //    return;
-    //}
-    // else {
-    // $(document).ready(function () {
-
-    var userName = $("#txtuserID").val();
+$(document).ready(function() {
     var URLlink = "http://localhost:8080";
-//statement will load the sedan details
+    //load data to the user table
+    var name = "admin@vehicleRental.com";
+    var email = '';
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: URLlink + "/user/findByUserName?",
-        data: "name=" + userName,
+        url: URLlink + "/user/findByName?",
+        data: "email=admin@vehicleRental.com",
         async: false,
-        success: function (data) {
-            console.log(data);
+        success: function (response) {
+            console.log(response);
+            email = response.name;
         }
     });
-    // });
-//}
 
-    event.preventDefault();
-    return;
-}
+    if (email == name) {
+        //alert("the user already exists");
+        event.preventDefault();
+        return;
+    }
+    else
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: URLlink + "/user/addUser?",
+            data: "name=admin@vehicleRental.com&surname=admin&password=admin123&role=admin",
+            async: false,
+            success: function (response) {
+                console.log("added new");
+                event.preventDefault();
+            }
+
+        });
+});
+
+
+
+//$(document).ready(function(){
+
+
+//});

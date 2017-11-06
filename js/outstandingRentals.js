@@ -1,21 +1,21 @@
 /**
- * Created by thabomoopa on 01/11/2017.
+ * Created by thabomoopa on 03/11/2017.
  */
 $(document).ready(function(){
-var URLlink = "http://localhost:8080";
-var info;
+    var URLlink = "http://localhost:8080";
+    var info;
 
 //variable to hold the array of href links
 
 
-var rentID = [];
-var rentDate = [];
-var rentReturnDate = [];
-var rentTotalAmount = [];
-var carMake = [];
-var carModel = [];
-var carYear = [];
-var carPlate = [];
+    var rentID = [];
+    var rentDate = [];
+    var rentReturnDate = [];
+    var rentTotalAmount = [];
+    var carMake = [];
+    var carModel = [];
+    var carYear = [];
+    var carPlate = [];
 
 //var rentRecord = [];
 //var carRecord = [];
@@ -32,16 +32,19 @@ var carPlate = [];
         success: function (rent) {
             $("#table tbody").empty();
             $.each(rent, function(key, value) {
-                //console.log(value.car);
-                //rentRecord.push( ,,);
-                rentID.push(value.id);
-                rentDate.push(value.rentDate);
-                rentReturnDate.push(value.returntDate);
-                rentTotalAmount.push(value.totalPrice);
-                carMake.push(value.car.make);
-                carModel.push(value.car.model);
-                carYear.push(value.car.year);
-                carPlate.push(value.car.numberPlate);
+                if(value.outstanding == true)
+                {
+
+                    rentID.push(value.id);
+                    rentDate.push(value.rentDate);
+                    rentReturnDate.push(value.returntDate);
+                    rentTotalAmount.push(value.totalPrice);
+                    carMake.push(value.car.make);
+                    carModel.push(value.car.model);
+                    carYear.push(value.car.year);
+                    carPlate.push(value.car.numberPlate);
+                }
+
 
             });
         }
@@ -52,7 +55,7 @@ var carPlate = [];
 
 
     for (var i = 0; i < rentID.length; i++) {
-
+       // $("#table tbody").empty();
         var htmlData = '';
         htmlData += '<tr>';
         htmlData += '<td>' + rentID[i] + '</td>';
@@ -63,10 +66,71 @@ var carPlate = [];
         htmlData += '<td>' + carYear[i] + '</td>';
         htmlData += '<td>' + carPlate[i] + '</td>';
         htmlData += '<td>' + rentTotalAmount[i] + '</td>';
+        htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+rentID[i]+'" id="returnCar">Return a car</a></td>';
         htmlData += '</tr>';
         $("#table tbody").append(htmlData);
     }
+$("a#returnCar").click(function(){
+    var returnCarRentID = $(this).data('value'); // would be 5
 
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: URLlink + "/rent/findAllRentedCars?",
+        //data: name,
+        async: false,
+        success: function (rent) {
+            //$("#table tbody").empty();
+            $.each(rent, function(key, value){
+                console.log(rent);
+                if(value.id == returnCarRentID){
+                    var outstanding = false;
+                    console.log(value.outstanding);
+                    console.log(value.order.id);
+                    console.log(value.car.id);
+
+                    var rentData = "rentId=" +returnCarRentID+"&rentDate="+value.rentDate+"&returnDate="+value.returnDate+"&totalPrice="
+                        +value.totalPrice+"&rentalDays="+value.rentalDays+"&outstanding="+outstanding;
+
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: URLlink + "/rent/"+value.order.id+"/"+value.car.id+"/updateRent?",
+                        data: rentData,
+                        async: false,
+                        success: function (car){
+                            console.log("updated outstanding");
+                        }
+
+                    });
+
+                    var status = true;
+                    var data = "id=" + value.car.id +
+                        "&make=" + value.car.make + "&model="+value.car.model+
+                        "&year="+value.car.year+"&numberPlate="+value.car.numberPlate+
+                        "&status="+status;
+
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: URLlink + "/car/"+value.car.category.id+"/updateCar?",
+                        data: data,
+                        async: false,
+                        success: function (car){
+                            location.href="outstandingRentals.html";
+                        }
+
+                    });
+
+                }
+
+            });
+        }
+
+    });
+    event.preventDefault();
+
+});
 
 });
 //find the rentals by the customer email
@@ -128,7 +192,7 @@ $(document).ready(function(){
 
         if(email == false)
         {
-            alert("email is wrong");
+            //alert("email is wrong");
         }
         else
         {
@@ -140,22 +204,25 @@ $(document).ready(function(){
                 //data: name,
                 async: false,
                 success: function (rent) {
-                    $("#table tbody").empty();
+                    //$("#table tbody").empty();
                     $.each(rent, function(key, value){
-                        if(value.order.customer.email == email)
-                        {
 
 
-                            rentID.push(value.id);
-                            console.log(value.id);
-                            rentDate.push(value.rentDate);
-                            rentReturnDate.push(value.returntDate);
-                            rentTotalAmount.push(value.totalPrice);
-                            carMake.push(value.car.make);
-                            carModel.push(value.car.model);
-                            carYear.push(value.car.year);
-                            carPlate.push(value.car.numberPlate);
-
+                            if(value.outstanding == true)
+                            {
+                                if(value.order.customer.email == email )
+                                {
+                                    console.log(value.order.customer.email );
+                                $("#table tbody").empty();
+                                rentID.push(value.id);
+                                rentDate.push(value.rentDate);
+                                rentReturnDate.push(value.returntDate);
+                                rentTotalAmount.push(value.totalPrice);
+                                carMake.push(value.car.make);
+                                carModel.push(value.car.model);
+                                carYear.push(value.car.year);
+                                carPlate.push(value.car.numberPlate);
+                            }
 
                         }
 
@@ -163,7 +230,7 @@ $(document).ready(function(){
 
                 }
             });
-           //
+            //
         }
 
         for (var i = 0; i < rentID.length; i++) {
@@ -178,6 +245,7 @@ $(document).ready(function(){
             htmlData += '<td>' + carYear[i] + '</td>';
             htmlData += '<td>' + carPlate[i] + '</td>';
             htmlData += '<td>' + rentTotalAmount[i] + '</td>';
+            htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+rentID[i]+'" id="returnCar">Return a car</a></td>';
             htmlData += '</tr>';
             $("#table tbody").append(htmlData);
         }
@@ -330,7 +398,7 @@ $(document).ready(function(){
 
         if(month == false || day==false || year == false)
         {
-           // $("#errorForm").text("Your date is incorrect. Please try again.");
+            // $("#errorForm").text("Your date is incorrect. Please try again.");
             event.preventDefault();
             return;
         }
@@ -346,19 +414,19 @@ $(document).ready(function(){
                 async: false,
                 success: function (rent) {
                     $.each(rent, function(key, value){
-                        if(value.rentDate == searchDate)
-                        {
+                        if(value.outstanding == true) {
+                            if (value.rentDate == searchDate) {
 
-                            $("#table tbody").empty();
-                            rentID.push(value.id);
-                            console.log(value.id);
-                            rentDate.push(value.rentDate);
-                            rentReturnDate.push(value.returntDate);
-                            rentTotalAmount.push(value.totalPrice);
-                            carMake.push(value.car.make);
-                            carModel.push(value.car.model);
-                            carYear.push(value.car.year);
-                            carPlate.push(value.car.numberPlate);
+                                $("#table tbody").empty();
+                                rentID.push(value.id);
+                                rentDate.push(value.rentDate);
+                                rentReturnDate.push(value.returntDate);
+                                rentTotalAmount.push(value.totalPrice);
+                                carMake.push(value.car.make);
+                                carModel.push(value.car.model);
+                                carYear.push(value.car.year);
+                                carPlate.push(value.car.numberPlate);
+                            }
                         }
                     });
 
@@ -378,6 +446,7 @@ $(document).ready(function(){
             htmlData += '<td>' + carYear[i] + '</td>';
             htmlData += '<td>' + carPlate[i] + '</td>';
             htmlData += '<td>' + rentTotalAmount[i] + '</td>';
+            htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+rentID[i]+'" id="returnCar">Return a car</a></td>';
             htmlData += '</tr>';
             $("#table tbody").append(htmlData);
         }
