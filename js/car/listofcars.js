@@ -15,7 +15,7 @@
 				success: function(data)
 				{
 					$.each(data, function(k, v){
-					$("#categoryButtons").append('<button id="categoryBtn" class="btn btn-outline-success" value='+v.id+'>'+v.name+'</button>');
+					$("#categoryButtons").append('<button id="categoryBtn" class="btn btn-outline-success" value='+v.id+'>'+v.name+'</button>&nbsp;');
 
 					});
 							//function to read all cars in the database and print to table
@@ -59,25 +59,24 @@
 							//event.preventDefault();
 
 					});
+			//function to make sure the delete href above are triggered
+            $("a#delete").click(function(){
+                var delete_href = $(this).data('value');
 
-					//function to make sure the delete href above are triggered
-					$("a#delete").click(function(){
-					   var delete_href = $(this).data('value');
-
-							//function to delete data from database
-							$.ajax({
-								type: "GET",
-								//dataType: "json",
-								url: URLlink + "/car/deleteCar?",
-								data: "id=" + delete_href,
-								async: false,
-								success: function(data)
-								{
-									location.href="listAllCars.html";
-								}
-							});
+                //function to delete data from database
+                $.ajax({
+                    type: "GET",
+                    //dataType: "json",
+                    url: URLlink + "/car/deleteCar?",
+                    data: "id=" + delete_href,
+                    async: false,
+                    success: function(data)
+                    {
+                        location.href="listAllCars.html";
+                    }
+                });
                         event.preventDefault();
-							});
+            });
 
 
 			//view cars based on the category id
@@ -90,45 +89,49 @@
 					url: URLlink + "/car/readAllCars?",
 								//data: name,
 					async: false,
-					success: function(data)
-					{
-						//$("#container").hide();
-						$("#table tbody").empty();
-						$.each(data, function(k, v){
+					success: function(data) {
+                        //$("#container").hide();
+                        $("#table tbody").empty();
+                        $.each(data, function (k, v) {
 
-							$.each(v, function(l, m){
+                            $.each(v, function (l, m) {
 
-									if(category_button == m.id){
-										var htmlData = '';
-										htmlData += '<tr>';
-										htmlData += '<td>' + v.id + '</td>';
-										htmlData += '<td>' + v.make + '</td>';
-										htmlData += '<td>' + v.model + '</td>';
-										htmlData += '<td>' + v.year + '</td>';
-                                        htmlData += '<td>' + v.numberPlate + '</td>';
-                                        htmlData += '<td>' + v.status + '</td>';
-										htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="'+v.id+'" id="edit">Edit</a><a href="" class="btn btn-outline-danger" data-value="'+v.id+'" id="delete">Delete</a><br /></td>';
-										htmlData += '</tr>';
-										$("#table tbody").append(htmlData);
+                                if (category_button == m.id) {
+                                    var htmlData = '';
+                                    htmlData += '<tr>';
+                                    htmlData += '<td>' + v.id + '</td>';
+                                    htmlData += '<td>' + v.make + '</td>';
+                                    htmlData += '<td>' + v.model + '</td>';
+                                    htmlData += '<td>' + v.year + '</td>';
+                                    htmlData += '<td>' + v.numberPlate + '</td>';
+                                    htmlData += '<td>' + v.status + '</td>';
+                                    htmlData += '<td><a href="" class="btn btn-outline-warning" data-value="' + v.id + '" id="edit">Edit</a><a href="" class="btn btn-outline-danger" data-value="' + v.id + '" id="delete">Delete</a><br /></td>';
+                                    htmlData += '</tr>';
+                                    $("#table tbody").append(htmlData);
 
-										}
-								});
-							});
+                                }
+                            });
+                        });
 
-							//function to make sure that the href tags in the inner loop are triggered
-							$("a").click(function(){
-							    edit_of_edit_button = $(this).data('value'); // would be 5
+                        //function to make sure that the href tags in the inner loop are triggered
+                        $("a").click(function () {
+                            edit_of_edit_button = $(this).data('value'); // would be 5
 
-									//load id into session variable
-									sessionStorage.setItem("carId", edit_of_edit_button);
+                            //load id into session variable
+                            sessionStorage.setItem("carId", edit_of_edit_button);
 
-									//open the edit car page
-									location.href="editCar.html";
-									event.preventDefault();
-								});
-						}
+                            //open the edit car page
+                           // location.href = "editCar.html";
+                            event.preventDefault();
+                        });
+                    },
+                    error:function()
+                    {
+                        alert("No data for that category");
+                    }
 
-					});
+
+                });
 			});
 
 			$("a#availableCars").click(function(){
@@ -194,14 +197,12 @@ $("a#unavailableCars").click(function(){
         async: false,
         success: function(car)
         {
-            //console.log(car);
-            //$("#container").hide();
+
             $("#table tbody").empty();
-            //$.each(car, function(k, v){
-            //console.log(v);
+
             $.each(car, function(l, m){
-                //console.log(m.status);
-                event.preventDefault();
+
+
                 if(valueTrue == m.status){
                     var htmlData = '';
                     htmlData += '<tr>';
@@ -216,8 +217,8 @@ $("a#unavailableCars").click(function(){
                     $("#table tbody").append(htmlData);
 
                 }
+                event.preventDefault();
             });
-            // });
 
             //function to make sure that the href tags in the inner loop are triggered
             $("a").click(function(){
@@ -231,7 +232,6 @@ $("a#unavailableCars").click(function(){
                 event.preventDefault();
             });
         }
-
     });
 });
 		//});

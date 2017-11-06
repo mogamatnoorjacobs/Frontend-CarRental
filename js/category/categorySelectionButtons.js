@@ -15,7 +15,7 @@ var info;
 				 var htmlStr = '';
 				    $.each(data, function(k, v){
 				        htmlStr += v.id + ' ' + v.name + '' + v.price + '<br />'; 
-    					document.write('<button class="btn btn-outline-success" value='+v.id+'>'+v.name+'</button>');
+    					document.write('<button class="btn btn-outline-success" value='+v.id+'>'+v.name+'</button>&nbsp; &nbsp;');
 
 				   }); 
 				    document.write('<br />');

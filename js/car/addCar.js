@@ -1,7 +1,4 @@
-/**
- * Created by thabomoopa on 04/11/2017.
- */
-//function to validate the category input
+
 function validateCategory(categoryNumber)
 {
     if(categoryNumber === "")
@@ -38,10 +35,11 @@ function validateMake(make)
         $("#txtMake").click(function(){
             $("#errorMake").fadeOut('slow');
         });
-        return false;
-
         //prevent the form from being submitted if there is an error
         event.preventDefault();
+        return false;
+
+
     }
     else
         return make;
@@ -70,10 +68,11 @@ function validateModel(model)
         $("#txtModel").click(function(){
             $("#errorModel").fadeOut('slow');
         });
-        return false;
-
         //prevent the form from being submitted if there is an error
         event.preventDefault();
+        return false;
+
+
     }
     else
         return model;
@@ -103,10 +102,11 @@ function validateYear(year)
         $("#txtYear").click(function(){
             $("#errorYear").fadeOut('slow');
         });
-        return false;
-
         //prevent the form from being submitted if there is an error
         event.preventDefault();
+        return false;
+
+
     }
     else
         return year;
@@ -135,10 +135,11 @@ function validateNumberPlate(numberPlate)
         $("#txtNumberPlate").click(function(){
             $("#errorNumberPlate").fadeOut('slow');
         });
-        return false;
-
         //prevent the form from being submitted if there is an error
         event.preventDefault();
+        return false;
+
+
     }
     else
         return numberPlate;
@@ -160,7 +161,7 @@ function addCar()
     if(categoryNumber == false || make == false || model == false || year == false || numberPlate == false)
     {
     	event.preventDefault();
-    	return;
+    	//return;
     }
     else
     {
@@ -173,15 +174,16 @@ function addCar()
     		async: false,
     		success: function(data)
     		{
-    						var infoHtml = "";
-    						infoHtml += '<div class="alert alert-success" role="alert">';
-    						infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
-    						infoHtml += '<hr>'
-    						infoHtml += '<p class="mb-0">Please click here to <a href="listAllCars.html" class="alert-link">View all cars</a></p>';
-    						infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
-    						infoHtml += '</div>';
+    		    console.log(data.id);
+                var infoHtml = "";
+                infoHtml += '<div class="alert alert-success" role="alert">';
+                infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
+                infoHtml += '<hr>';
+                infoHtml += '<p class="mb-0">Please click here to <a href="listAllCars.html" class="alert-link">View all cars</a></p>';
+                infoHtml += '<p class="mb-0">Please click here to <a href="car.html" class="alert-link">Add a new car</a></p>';
+                infoHtml += '</div>';
 
-    						$("#container").fadeIn().html(infoHtml);
+                $("#container").fadeIn().html(infoHtml);
     		}
     	});
     }
