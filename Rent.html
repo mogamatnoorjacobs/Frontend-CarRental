@@ -6,10 +6,10 @@
     <title>Rent</title>
 
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="js/additional/jquery-1.12.4.js"></script>
+    <script src="js/additional/jquery-1.12.1.js"></script>
+    <script src="js/additional/popper.min.js"></script>
     <link rel="stylesheet" href="css/navigation.css">
     <style>
         .footer{
@@ -31,7 +31,7 @@
 
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="homepage.html"><img src="images/car.svg" height="90" weight="90">&nbsp;<span style="font-size: 2em">Vehicle Rentals</span></a>
+        <a class="navbar-brand" href="homepage.html"><img src="images/car.svg" height="90" width="90">&nbsp;<span style="font-size: 2em">Vehicle Rentals</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,20 +43,20 @@
                     <div class="dropdown">
                         <button class="btn btn-secondary" onclick="homepage()" type="button" id="home" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Home
-                        </button>
+                        </button>&nbsp;
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
                         <button class="btn btn-secondary" onclick="registerUser()" type="button" id="register" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Register
-                        </button>
+                        </button>&nbsp;
                     </div>
                 </li>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Car
-                    </button>
+                    </button>&nbsp;
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <button class="dropdown-item" type="button" id="carLink" onclick="car()">Add Car</button>
                         <button class="dropdown-item" type="button" id="viewAllCarsLink" onclick="viewAllCars()">View All Cars</button>
@@ -66,7 +66,7 @@
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Customer
-                        </button>
+                        </button>&nbsp;
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
                             <button class="dropdown-item" type="button" onclick="addCustomer()">Add Customer</button>
                             <button class="dropdown-item" type="button" onclick="viewCustomers()">View All Customers</button>
@@ -107,7 +107,7 @@
             <!-- buttons to select the category for the car -->
             <h3>Rent</h3>
             <h6>Select category for car</h6>
-            <script src="js/categorySelectionButtons.js"></script>
+            <script src="js/category/categorySelectionButtons.js"></script>
             <span id="categoryList"></span>
             <br />
 
@@ -119,7 +119,7 @@
                 </tr>
                 <thead>
                 <tbody>
-                <script src="js/rent.js"></script>
+                <script src="js/rentals/rent.js"></script>
                 <div id="editAndDeleteButtons"></div>
                 </tbody>
             </table>
@@ -129,7 +129,7 @@
 
                 <!--Details for the car you are inserting -->
 
-                <script src="js/calculatePrice.js"></script>
+                <script src="js/rentals/calculatePrice.js"></script>
 
                 <!-- Date picker for Rent date -->
                 <div class="form-group row">
@@ -206,16 +206,16 @@
 
 <br />
 
-<div class="container-fluid">
+
     <footer class="footer">
         <div class="container">
             <p class="text-muted text-center">Developers: Thabo | Noor | JP | McDave | Watson</p>
         </div>
     </footer>
-<script src="js/bootstrap.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="js/additional/bootstrap.js"></script>
+<script src="js/additional/popper2.min.js"></script>
 </div>
-</div>
+
 </body>
 </html>
 

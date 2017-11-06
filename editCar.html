@@ -3,25 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Car</title>
+    <title>Edit Car</title>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="js/additional/jquery-1.12.4.js"></script>
+    <script src="js/additional/jquery-1.12.1.js"></script>
+    <script src="js/additional/popper.min.js"></script>
+    <link rel="stylesheet" href="css/navigation.css">
+    <style>
+        .footer{
+            font-size: 1em;
+            -webkit-box-shadow: 0 8px 6px -6px #999;
+            -moz-box-shadow: 0 8px 6px -6px #999;
+            box-shadow: 0 8px 6px -6px #999;
+            position: static;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: #e3f2fd;
+        }
+    </style>
 
+</head>
+<body>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="homepage.html"><img src="images/car.svg" height="90" weight="90">&nbsp;<span style="font-size: 2em">Vehicle Rentals</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <!--<a class="nav-link" href="index.html">Login</a>-->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary" onclick="homepage()" type="button" id="home" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Home
+                        </button>&nbsp;
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary" onclick="registerUser()" type="button" id="register" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Register
+                        </button>&nbsp;
+                    </div>
+                </li>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Car
+                    </button>&nbsp;
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button" id="carLink" onclick="car()">Add Car</button>
+                        <button class="dropdown-item" type="button" id="viewAllCarsLink" onclick="viewAllCars()">View All Cars</button>
+                    </div>
+                </div>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Customer
+                        </button>&nbsp;
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                            <button class="dropdown-item" type="button" onclick="addCustomer()">Add Customer</button>
+                            <button class="dropdown-item" type="button" onclick="viewCustomers()">View All Customers</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br />
     <script>
-        $(document).ready(function() {
-            $("#header").load("./templates/inc_header.html");
-            $("#footer").load("./templates/inc_footer.html");
-        });
+        function car(){
+            location.href="car.html";
+        }
+        function viewAllCars(){
+            location.href="listAllCars.html";
+        }
+        function addCustomer(){
+            location.href="addCustomer.html";
+        }
+        function viewCustomers(){
+            location.href="listAllCustomers.html";
+        }
+        function homepage()
+        {
+            location.href="homepage.html";
+        }
+        function registerUser()
+        {
+            location.href="register.html";
+        }
+
     </script>
-    <div id="header"></div>
-    <!--Body starts here-->
-    <script src="js/editCar.js"></script>
     <div id="container" class="container-fluid">
+    <script src="js/rentals/editCar.js"></script>
         <ul class="list-group">
             <li class="list-group-item">
                 <h1>Edit Car</h1>
                 <!-- buttons to select the category for the car -->
-                <form name="carForm" id="carForm" method="post" action="<?php $_SERVER['SCRIPT_NAME']; ?>">
+                <form name="carForm" id="carForm" method="post">
 
 
                     <!-- Details for the car you are inserting -->
@@ -103,9 +188,17 @@
             </li>
         </ul>
     </div>
-
-    <script src="js/bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <!--body footer starts here-->
     <br />
-    <div id="footer"></div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted text-center">Developers: Thabo | Noor | JP | McDave | Watson</p>
+            </div>
+        </footer>
+        <script src="js/additional/bootstrap.js"></script>
+        <script src="js/additional/popper2.min.js"></script>
+    </div>
+
+</body>
+</html>
+

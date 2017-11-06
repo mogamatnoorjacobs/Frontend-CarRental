@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#txtEmail").fadeIn(1000);
     var URLlink = "http://localhost:8080";
     //load data to the user table
     var name = "admin@vehicleRental.com";
@@ -33,6 +34,9 @@ $(document).ready(function() {
             }
 
         });
+
+
+
 });
 
 

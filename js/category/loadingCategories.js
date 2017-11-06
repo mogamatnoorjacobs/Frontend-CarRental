@@ -12,7 +12,7 @@ var categories = "Sedan,450,SUV,500,Limos,1000,Trailers,2000,Buses,600";
 var URLlink = "http://localhost:8080";
 
 //variable to find if the database has a category named Sedan
-var name = "name=Sedan"; 
+var id = 1;
 
 /* The following variables will hold the data for the different categories
 * var sedan will load the database with the name and price
@@ -35,16 +35,16 @@ if it's load then it will prevent the data from being loaded again.
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: URLlink + "/category/findByName?",
-			data: name,
+			url: URLlink + "/category/read?",
+			data: "id=" + id,
 			async: false,
 			success: function(data)
 			{ 
-				available = data.name; 
+				available = data.id;
 			}
 		});
 
-		if(available == "Sedan")
+		if(available == 1)
 		{
 		}
 		else

@@ -75,6 +75,7 @@ $("button").click(function(){
                 sessionStorage.setItem("carId", edit_of_edit_button);
 
                 event.preventDefault();
+
             });
         }
 

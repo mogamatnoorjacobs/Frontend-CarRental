@@ -1,6 +1,3 @@
-/**
- * Created by thabomoopa on 01/11/2017.
- */
 $(document).ready(function() {
     sessionStorage.clear();
     //variable to hold the link for the post, get and delete requests
@@ -55,7 +52,7 @@ $(document).ready(function() {
                 sessionStorage.setItem("sessionInfo","_" + customerSelection_button + "_" +invoiceID);
 
                 event.preventDefault();
-                location.href="rent.html";
+                location.href="Rent.html";
             }
         });
 
