@@ -64,6 +64,8 @@
 					$("a#delete").click(function(){
 					   var delete_href = $(this).data('value');
 
+						var deleteConfirmation = confirm("Click OK to Delete");
+						if (deleteConfirmation == true) {
 							//function to delete data from database
 							$.ajax({
 								type: "GET",
@@ -76,7 +78,11 @@
 									location.href="listAllCars.html";
 								}
 							});
-                        event.preventDefault();
+						} else {
+							txt = "Request Cancelled";
+						}
+
+                       event.preventDefault();
 							});
 
 

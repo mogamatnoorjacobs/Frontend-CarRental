@@ -20,18 +20,37 @@ $(document).ready(function() {
     });
 
 });
-function deleteCustomer(customerID){
-    aler
-    $.getJSON('http://localhost:8080/customer/deleteCustomer?customerID='+customerID+'', function (data) {
-        $.each(data, function (index) {
-            //alert(data[index].id);
 
-            if(data[index].email == ""){
-                alert("Customer deleted");
-            }
-            else {
-                alert("deleting customer failed");
-            }
-        });
-    });
+function deleteCustomer(customerID){
+    var txt;
+    var r = confirm("Click OK to Delete");
+    if (r == true) {
+        if($.getJSON('http://localhost:8080/customer/deleteCustomer?customerID='+customerID+'', function (data) {
+                $.each(data, function (index) { });}) ) {
+            location.reload();
+        }
+    } else {
+        txt = "Customer not Deleted";
+    }
+
 }
+
+//function to make sure the delete href above are triggered
+
+//function deleteCustomer(customerID){
+//
+//    alert
+//    $.getJSON('http://localhost:8080/customer/deleteCustomer?customerID='+customerID+'', function (data) {
+//        $.each(data, function (index) {
+//            //alert(data[index].id);
+//
+//            if(data[index].email == ""){
+//
+//                  alert("Customer deleted");
+//            }
+//            else {
+//                alert("deleting customer failed");
+//            }
+//        });
+//    });
+//}
