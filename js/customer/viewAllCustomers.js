@@ -34,23 +34,3 @@ function deleteCustomer(customerID){
     }
 
 }
-
-//function to make sure the delete href above are triggered
-
-//function deleteCustomer(customerID){
-//
-//    alert
-//    $.getJSON('http://localhost:8080/customer/deleteCustomer?customerID='+customerID+'', function (data) {
-//        $.each(data, function (index) {
-//            //alert(data[index].id);
-//
-//            if(data[index].email == ""){
-//
-//                  alert("Customer deleted");
-//            }
-//            else {
-//                alert("deleting customer failed");
-//            }
-//        });
-//    });
-//}
