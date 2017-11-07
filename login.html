@@ -148,7 +148,8 @@
                         {
                             if(password == value.password)
                             {
-                               homepage();
+                                sessionStorage.setItem("userRole",value.role);
+                                homepage();
                                 event.preventDefault();
                             }
                             else
