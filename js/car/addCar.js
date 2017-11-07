@@ -113,7 +113,36 @@ function validateYear(year)
 }
 function validateNumberPlate(numberPlate)
 {
-    if(numberPlate === "")
+    var plate = '';
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: URLlink + "/car/readAllCars?",
+        //data: data,
+        async: false,
+        success: function(data)
+        {
+            $.each(data, function(key, value){
+                plate = value.numberPlate;
+            })
+
+        }
+    });
+
+    if(plate == numberPlate)
+    {
+        $("#errorNumberPlate").text("Number plate already exists.").show();
+
+        //fade out the error text when the user clicks on the textbox
+        $("#txtNumberPlate").click(function(){
+            $("#errorNumberPlate").fadeOut('slow');
+        });
+
+        //prevent the form from being submitted if there is an error
+        event.preventDefault();
+        return false;
+    }
+    else if(numberPlate === "")
     {
         $("#errorNumberPlate").text("Please enter quantity.").show();
 
@@ -147,7 +176,6 @@ function validateNumberPlate(numberPlate)
 //function to validate the submit button from the form
 function addCar()
 {
-    console.log("im in");
     var categoryNumber = validateCategory($("#txtCategory").val());
     var status = true;
     var make = validateMake($("#txtMake").val());
@@ -174,7 +202,7 @@ function addCar()
     		async: false,
     		success: function(data)
     		{
-    		    console.log(data.id);
+
                 var infoHtml = "";
                 infoHtml += '<div class="alert alert-success" role="alert">';
                 infoHtml += '<h4 class="alert-heading">Successfully Added a ' + make + ' ' + model + ' ' + year + ' ' + numberPlate + '</h4>';
