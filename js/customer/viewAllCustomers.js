@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
 
@@ -15,23 +14,22 @@ $(document).ready(function() {
                 "<input class=\"btn btn-outline-danger\" type='button' value='Delete Customer' onclick='deleteCustomer("+data[index].id+"); return false;'></input> </td> " +
                 "</tr>")
                 .prependTo(".customersTable")
-                //alert(data[index].name);
+            //alert(data[index].name);
         });
     });
 
 });
-function deleteCustomer(customerID){
-    aler
-    $.getJSON('http://localhost:8080/customer/deleteCustomer?customerID='+customerID+'', function (data) {
-        $.each(data, function (index) {
-            //alert(data[index].id);
 
-            if(data[index].email == ""){
-                alert("Customer deleted");
-            }
-            else {
-                alert("deleting customer failed");
-            }
-        });
-    });
+function deleteCustomer(customerID){
+    var txt;
+    var r = confirm("Click OK to Delete");
+    if (r == true) {
+        if($.getJSON('http://localhost:8080/customer/deleteCustomer?customerID='+customerID+'', function (data) {
+                $.each(data, function (index) { });}) ) {
+            location.reload();
+        }
+    } else {
+        txt = "Customer not Deleted";
+    }
+
 }

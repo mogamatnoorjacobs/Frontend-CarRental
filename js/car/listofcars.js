@@ -59,26 +59,33 @@
 							//event.preventDefault();
 
 					});
-			//function to make sure the delete href above are triggered
-            $("a#delete").click(function(){
-                var delete_href = $(this).data('value');
+			
 
-                //function to delete data from database
-                $.ajax({
-                    type: "GET",
-                    //dataType: "json",
-                    url: URLlink + "/car/deleteCar?",
-                    data: "id=" + delete_href,
-                    async: false,
-                    success: function(data)
-                    {
-                        location.href="listAllCars.html";
-                    }
-                });
-                        event.preventDefault();
-            });
+					//function to make sure the delete href above are triggered
+					$("a#delete").click(function(){
+					   var delete_href = $(this).data('value');
 
+						var deleteConfirmation = confirm("Click OK to Delete");
+						if (deleteConfirmation == true) {
+							//function to delete data from database
+							$.ajax({
+								type: "GET",
+								//dataType: "json",
+								url: URLlink + "/car/deleteCar?",
+								data: "id=" + delete_href,
+								async: false,
+								success: function(data)
+								{
+									location.href="listAllCars.html";
+								}
+							});
+						} else {
+							txt = "Request Cancelled";
+						}
 
+                       event.preventDefault();
+							});
+    
 			//view cars based on the category id
 			$("button").click(function(){
 
