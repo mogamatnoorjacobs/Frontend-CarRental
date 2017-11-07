@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
 
@@ -12,10 +11,10 @@ $(document).ready(function() {
                 "<td>"+  data[index].email +" </td> " +
                 "<td> <a href='updateCustomer.html?customerID="+data[index].id+"' > Update Customer </a> </td> " +
                 "<td  id='deleteCustomer'> " +
-                "<input class=\"btn btn-outline-danger\" type='button' value='Delete Customer' onclick='deleteCustomer("+data[index].id+"); return false;'> </input> </td> " +
+                "<input class=\"btn btn-outline-danger\" type='button' value='Delete Customer' onclick='deleteCustomer("+data[index].id+"); return false;'></input> </td> " +
                 "</tr>")
                 .prependTo(".customersTable")
-                //alert(data[index].name);
+            //alert(data[index].name);
         });
     });
 
