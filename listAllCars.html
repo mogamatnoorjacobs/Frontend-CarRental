@@ -73,6 +73,19 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item">
+
+                    <div class="dropdown">
+
+                        <button class="btn btn-secondary" onclick="logOut()" type="button" id="logOut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            Logout
+
+                        </button>&nbsp;
+
+                    </div>
+
+                </li>
             </ul>
         </div>
     </nav>
@@ -97,6 +110,17 @@
         function registerUser()
         {
             location.href="register.html";
+        }
+        function logOut()
+
+        {
+
+            var txt;
+            var r = confirm("Click OK to confirm Logout");
+            if (r == true) {
+                sessionStorage.clear();
+                location.href="login.html";
+            }
         }
 
     </script>
