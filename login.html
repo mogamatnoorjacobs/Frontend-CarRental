@@ -133,16 +133,52 @@
             //return;
         }
         else {
-            location.href = "homepage.html";
-            event.preventDefault();
-            //return;
+            var correctEmail = '';
+            var correctPassword = '';
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: URLlink + "/user/findAllUsers?",
+                //data: "email=admin@vehicleRental.com",
+                async: false,
+                success: function (response) {
+                    $.each(response, function(key, value){
+                        //console.log(value.name);
+                        if(email == value.name)
+                        {
+                            if(password == value.password)
+                            {
+                               homepage();
+                                event.preventDefault();
+                            }
+                            else
+                            {
+                                $('#errorPage').html('<div class="alert alert-danger" role="alert">Password is incorrect. Please try again!</div>');
+                                event.preventDefault();
+                            }
+
+                        }
+                        else
+                        {
+                            $('#errorPage').html('<div class="alert alert-danger" role="alert">Email is incorrect. Please try again!</div>');
+                            event.preventDefault();
+                        }
+
+                    });
+
+                }
+            });
+
         }
     }
-
+    function homepage()
+    {
+        location.href="homepage.html";
+    }
 </script>
 <script src="js/registerAndLogin/Login.js"></script>
 <div id="container" class="container-fluid">
-
+    <span id="errorPage"></span>
         <ul class="list-group">
             <li class="list-group-item">
                 <h1>Login</h1>
